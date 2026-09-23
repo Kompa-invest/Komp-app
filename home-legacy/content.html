@@ -1,0 +1,400 @@
+
+<nav>
+  <div class="logo">
+    <svg width="26" height="26" viewBox="0 0 98 98">
+      <circle cx="49" cy="49" r="45" fill="none" stroke="var(--text)" stroke-width="5"></circle>
+      <polygon points="49,10 53,28 49,38 45,28" fill="var(--accent)"></polygon>
+      <polygon points="41,40 48,24 48,40" fill="var(--accent)"></polygon>
+      <polygon points="57,40 50,24 50,40" fill="var(--accent)"></polygon>
+      <rect x="43" y="38" width="12" height="5" rx="2.5" fill="var(--accent)"></rect>
+      <rect x="47" y="43" width="4" height="6" rx="1" fill="var(--accent)"></rect>
+      <polygon points="49,88 59,49 39,49" fill="var(--accent)"></polygon>
+      <polygon points="49,10 59,49 39,49" fill="var(--accent)" transform="rotate(90 49 49)"></polygon>
+      <polygon points="49,10 59,49 39,49" fill="var(--accent)" transform="rotate(270 49 49)"></polygon>
+      <polygon points="49,22 55,49 43,49" fill="var(--accent)" opacity="0.45" transform="rotate(45 49 49)"></polygon>
+      <polygon points="49,22 55,49 43,49" fill="var(--accent)" opacity="0.45" transform="rotate(135 49 49)"></polygon>
+      <polygon points="49,22 55,49 43,49" fill="var(--accent)" opacity="0.45" transform="rotate(225 49 49)"></polygon>
+      <polygon points="49,22 55,49 43,49" fill="var(--accent)" opacity="0.45" transform="rotate(315 49 49)"></polygon>
+      <circle cx="49" cy="49" r="7" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"></circle>
+    </svg>
+    Kompa
+  </div>
+  <div class="navlinks">
+    <a href="#decodeur-tool" class="editable">Décodeur</a>
+    <a href="#second-opinion-tool" class="editable">Second Opinion</a>
+    <a href="#comprendre" class="editable">Comprendre mes investissements</a>
+  </div>
+  <div class="navactions">
+    <button class="btn-icon" id="settingsBtn" aria-label="Réglages d'apparence" title="Réglages d'apparence">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1.04-1.56V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.56 1.04H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z"></path></svg>
+    </button>
+    <a href="/login" class="btn editable" id="navAuthBtn">Créer un compte / Se connecter</a>
+  </div>
+</nav>
+
+<div class="wrap hero">
+  <div class="kicker editable">Une interface de compréhension financière</div>
+  <h1 class="editable">Comprendre,<br>avant de décider.</h1>
+  <p class="lede editable">Ce que vous possédez, ce qu'on vous propose, combien cela coûte réellement. Traduit en langage clair, sans rien vous vendre.</p>
+  <div class="row">
+    <a href="#decodeur-tool" class="btn editable">Décoder un produit</a>
+    <a href="#second-opinion-tool" class="btn-ghost editable">Analyser une proposition</a>
+  </div>
+  <p class="editable" style="font-size:12px;color:var(--muted);margin-top:18px;max-width:460px;">Kompa fournit de l'information. Kompa ne formule pas de conseil personnalisé et ne gère pas votre argent.</p>
+
+  <div class="doors">
+    <a href="#incontournables" class="door">
+      <span class="door-kicker editable">Je débute</span>
+      <span class="door-title editable">Je n'ai jamais investi</span>
+      <span class="door-desc editable">Comprendre les bases avant de se lancer, sans jargon.</span>
+    </a>
+    <a href="#outils" class="door">
+      <span class="door-kicker editable">J'ai déjà investi</span>
+      <span class="door-title editable">J'ai des placements ou une proposition à analyser</span>
+      <span class="door-desc editable">Décoder, comparer, obtenir une seconde lecture.</span>
+    </a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b class="editable">1,8 % → 0,6 %</b><span class="editable">écarts de frais typiques entre deux produits comparables</span></div>
+    <div class="stat"><b class="editable">72 %</b><span class="editable">exposition réelle aux États-Unis d'un ETF « World » type</span></div>
+    <div class="stat"><b class="editable">48 h</b><span class="editable">délai de retour sur une Second Opinion</span></div>
+  </div>
+
+  <div class="cards" id="outils">
+    <div class="card" id="decodeur">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.4" y2="16.4"></line></svg>
+      <h3 class="editable">Le Décodeur</h3>
+      <p class="editable">Un ISIN, un ticker, un nom de fonds, quel que soit votre niveau de connaissance du sujet. On traduit ce que vous détenez réellement, ses frais en euros, ses risques en langage courant.</p>
+      <a href="#decodeur-tool" class="editable">Décoder un produit →</a>
+    </div>
+    <div class="card" id="second-opinion">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+      <h3 class="editable">Second Opinion</h3>
+      <p class="editable">Une banque ou un conseiller vous a soumis une proposition de placement. Déposez le document reçu : un analyste indépendant l'examine et vous transmet, en langage clair, les éléments essentiels à comprendre avant de signer.</p>
+      <a href="#second-opinion-tool" class="editable">Déposer une proposition →</a>
+    </div>
+    <div class="card" id="comprendre">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><path d="M3 3v18h18"></path><path d="M7 15l4-5 4 3 5-8"></path></svg>
+      <h3 class="editable">Comprendre mes investissements</h3>
+      <p class="editable">Importez ce que vous détenez déjà (assurance-vie, PEA, compte-titres). On regarde à l'intérieur de vos fonds pour repérer ce qui vous échappe : trois fonds qui misent en fait sur les mêmes entreprises, une concentration cachée, des frais qui s'accumulent sans que vous le sachiez.</p>
+      <a href="#xray-tool" class="editable">Analyser mon portefeuille →</a>
+    </div>
+    <div class="card" id="marches">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><polyline points="3 17 9 11 13 15 21 6"></polyline><polyline points="15 6 21 6 21 12"></polyline></svg>
+      <h3 class="editable">Comprendre les marchés</h3>
+      <p class="editable">Chaque semaine, on vous explique pourquoi les indices ont bougé, pas seulement de combien. Le pétrole, les taux, une décision de banque centrale : les mécanismes, en langage clair.</p>
+      <a href="#markets-tool" class="editable">En savoir plus →</a>
+    </div>
+    <div class="card">
+      <span class="badge editable">Bientôt</span>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+      <h3 class="editable">Pourquoi mon portefeuille a bougé</h3>
+      <p class="editable">Plutôt qu'un simple pourcentage, on vous montre ce qui, dans l'actualité économique de la semaine, explique la variation de votre propre argent.</p>
+      <a href="#" class="editable">En savoir plus →</a>
+    </div>
+    <div class="card">
+      <span class="badge editable">Bientôt</span>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="1.4"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2.2 2.2 4.8-5"></path></svg>
+      <h3 class="editable">Le Clarity Test</h3>
+      <p class="editable">Après une analyse, un test très court vérifie ce que vous avez retenu du produit, pas vos connaissances générales en finance. L'objectif : s'assurer que vous comprenez votre décision, jamais la prendre à votre place.</p>
+      <a href="#" class="editable">En savoir plus →</a>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="decodeur-tool">
+  <div class="screen-topbar">
+    <button class="back-link" id="decoderBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour à l'accueil
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;">
+  <div class="kicker">Bibliothèque de produits financiers</div>
+  <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 10px;">Trouvez le produit que vous cherchez à comprendre.</h2>
+  <p style="color:var(--muted);font-size:14px;max-width:560px;margin:0 0 20px;">Parcourez par catégorie, ou cherchez directement un nom, un ticker ou un ISIN.</p>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
+    <input id="decoderInput" type="text" placeholder="ex. World, S&amp;P 500, Nasdaq, Emerging, CAC 40..." style="flex:1;min-width:220px;padding:13px 18px;border-radius:100px;border:1px solid var(--border);background:var(--card);color:var(--text);font-family:inherit;font-size:14px;">
+    <button id="decoderBtn" class="btn" style="border:none;">Décoder</button>
+  </div>
+
+  <p style="font-size:13px;color:var(--muted);margin:8px 0 28px;">
+    Pas encore familier avec les ETF, les actions ou les obligations ?
+    <button id="glossaryOpen" class="glossary-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      Retrouvez des explications simples dans notre glossaire
+    </button>
+  </p>
+
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" data-tab="etf">ETF et indices</button>
+    <button class="cat-tab" data-tab="actions">Actions</button>
+    <button class="cat-tab" data-tab="obligations">Obligations</button>
+    <button class="cat-tab" data-tab="fonds">Fonds d'investissement</button>
+    <button class="cat-tab" data-tab="monetaires">Produits monétaires</button>
+    <button class="cat-tab" data-tab="immobilier">Immobilier</button>
+    <button class="cat-tab" data-tab="structures">Produits structurés</button>
+  </div>
+
+  <div class="tab-panel" data-tab="etf">
+    <div class="callout">
+      <b>Indice ou ETF, quelle différence ?</b>
+      <p>Un indice mesure la performance d'un ensemble de valeurs, comme le MSCI World et ses 1 500 entreprises. Un ETF est le produit que vous achetez réellement pour chercher à reproduire cet indice. Plusieurs ETF peuvent suivre le même indice, avec des frais et une éligibilité au PEA différents.</p>
+    </div>
+    <div id="etfGroups"></div>
+  </div>
+
+  <div class="tab-panel" data-tab="actions" hidden>
+    <div class="callout"><b>Une action, qu'est-ce que c'est ?</b><p>Une action est une part de propriété d'une entreprise cotée en bourse. Contrairement à un ETF, elle ne diversifie rien : vous misez sur une seule entreprise.</p></div>
+    <div id="grid-actions" class="product-grid"></div>
+  </div>
+  <div class="tab-panel" data-tab="obligations" hidden>
+    <div class="callout"><b>Une obligation, qu'est-ce que c'est ?</b><p>Une obligation est un prêt que vous faites à un État ou une entreprise, qui vous verse des intérêts et vous rembourse à une date fixée.</p></div>
+    <div id="grid-obligations" class="product-grid"></div>
+  </div>
+  <div class="tab-panel" data-tab="fonds" hidden>
+    <div class="callout"><b>Fonds actif ou ETF, quelle différence ?</b><p>Un fonds d'investissement classique est géré par une équipe humaine qui choisit les titres, contrairement à un ETF qui suit un indice automatiquement, en général avec des frais plus élevés.</p></div>
+    <div id="grid-fonds" class="product-grid"></div>
+  </div>
+  <div class="tab-panel" data-tab="monetaires" hidden>
+    <div class="callout"><b>À quoi servent les produits monétaires ?</b><p>Ils visent la sécurité du capital plutôt que la performance, pour de l'argent que vous pourriez avoir besoin de récupérer rapidement.</p></div>
+    <div id="grid-monetaires" class="product-grid"></div>
+  </div>
+  <div class="tab-panel" data-tab="immobilier" hidden>
+    <div class="callout"><b>Investir dans l'immobilier sans acheter de bien</b><p>Ces produits permettent d'être exposé au marché immobilier sans gérer un bien physique, avec des niveaux de liquidité très différents.</p></div>
+    <div id="grid-immobilier" class="product-grid"></div>
+  </div>
+  <div class="tab-panel" data-tab="structures" hidden>
+    <div class="callout"><b>Des produits plus complexes</b><p>Les produits structurés combinent souvent une protection partielle du capital avec un rendement conditionnel. Leurs mécanismes méritent une lecture attentive avant de s'engager.</p></div>
+    <div id="grid-structures" class="product-grid"></div>
+  </div>
+
+  </div>
+</div>
+
+<div class="screen" id="productScreen" style="z-index:55;">
+  <div class="screen-topbar">
+    <button class="back-link" id="productBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour à la bibliothèque
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;" id="productScreenBody"></div>
+</div>
+
+<div class="screen" id="glossaryScreen" style="z-index:60;">
+  <div class="screen-topbar">
+    <button class="back-link" id="glossaryBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;">
+    <div class="kicker">Glossaire</div>
+    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 24px;">Les mots qui reviennent souvent.</h2>
+    <div class="concept-grid" style="grid-template-columns:1fr;max-width:640px;">
+      <div><b>Indice</b><span>Une mesure de la performance d'un ensemble de valeurs (par exemple 500 entreprises), sans être un produit qu'on achète directement.</span></div>
+      <div><b>ETF</b><span>Un produit coté en bourse qui cherche à reproduire la performance d'un indice, en détenant réellement (ou via un contrat) les actifs qui le composent.</span></div>
+      <div><b>Risque</b><span>Plus un placement peut rapporter, plus il peut aussi perdre de la valeur temporairement.</span></div>
+      <div><b>Diversification</b><span>Ne pas mettre tous ses œufs dans le même panier, ni dans des paniers qui se ressemblent trop.</span></div>
+      <div><b>Horizon</b><span>Le temps que vous pouvez laisser cet argent investi sans y toucher.</span></div>
+      <div><b>Frais (TER)</b><span>Le coût annuel du produit, exprimé en pourcentage, prélevé automatiquement sur la performance.</span></div>
+      <div><b>Liquidité</b><span>La facilité, ou non, à récupérer votre argent quand vous en avez besoin.</span></div>
+      <div><b>Réplication physique</b><span>L'ETF détient réellement les actions ou obligations de l'indice qu'il suit.</span></div>
+      <div><b>Réplication synthétique</b><span>L'ETF passe par un contrat avec une banque pour reproduire la performance de l'indice, sans détenir directement les titres.</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="secondOpinionScreen" style="z-index:55;">
+  <div class="screen-topbar">
+    <button class="back-link" id="soBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour à l'accueil
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;max-width:720px;">
+    <div class="kicker">Second Opinion</div>
+    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 14px;">Une seconde lecture indépendante, avant de signer.</h2>
+    <p style="color:var(--muted);font-size:15px;line-height:1.6;max-width:640px;margin:0 0 24px;">Une banque ou un conseiller vous a remis une proposition de placement ? Déposez le document reçu ci-dessous. À ce stade du projet, c'est un analyste indépendant de l'équipe Kompa qui l'examine personnellement, pas un algorithme, et vous transmet en langage clair les éléments essentiels à comprendre avant de signer. <strong style="color:var(--text);">Réponse sous 48h ouvrées.</strong></p>
+
+    <div class="callout">
+      <b>Confidentialité</b>
+      <p>Le document que vous déposez ne sert qu'à cette analyse. Il n'est ni transmis à des tiers, ni revendu, ni utilisé à d'autres fins.</p>
+    </div>
+
+    <p style="font-size:12px;color:var(--muted);margin:0 0 32px;max-width:560px;">Kompa fournit de l'information sur la base du document déposé. Kompa ne formule pas de conseil personnalisé et ne gère pas votre argent : la décision finale vous appartient toujours.</p>
+
+    <form id="soForm" novalidate>
+      <span class="so-label">Votre document</span>
+      <div class="so-dropzone" id="soDropzone" tabindex="0" role="button" aria-label="Déposer un fichier ou parcourir">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" style="margin:0 auto;display:block;"><path d="M12 16V4"></path><path d="M6 10l6-6 6 6"></path><path d="M4 20h16"></path></svg>
+        <p>Glissez-déposez votre document ici, ou <span class="so-browse" id="soBrowseBtn">parcourez vos fichiers</span></p>
+        <p class="so-hint">PDF, JPG, PNG ou Word — 10 Mo maximum</p>
+        <input type="file" id="soFileInput" accept=".pdf,application/pdf,.jpg,.jpeg,image/jpeg,.png,image/png,.doc,application/msword,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;">
+      </div>
+      <div class="so-file-info" id="soFileInfo" style="display:none;"></div>
+
+      <label class="so-label" for="soMessage">Que voulez-vous qu'on regarde en priorité ? (facultatif)</label>
+      <textarea class="so-field" id="soMessage" rows="4" placeholder="Par exemple : les frais, le risque de perte, si le produit correspond à mon horizon..."></textarea>
+
+      <label class="so-label" for="soName">Nom complet *</label>
+      <input class="so-field" type="text" id="soName" autocomplete="name">
+      <div class="so-error" id="soNameError">Merci d'indiquer votre nom complet.</div>
+
+      <label class="so-label" for="soEmail">E-mail *</label>
+      <input class="so-field" type="email" id="soEmail" autocomplete="email">
+      <div class="so-error" id="soEmailError">Merci d'indiquer une adresse e-mail valide.</div>
+
+      <label class="so-label" for="soPhone">Téléphone *</label>
+      <input class="so-field" type="tel" id="soPhone" autocomplete="tel">
+      <div class="so-error" id="soPhoneError">Merci d'indiquer votre numéro de téléphone.</div>
+
+      <div class="so-attach-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <p style="margin:0;font-size:13px;color:var(--muted);line-height:1.5;">Ce prototype ne peut pas joindre votre fichier automatiquement : en cliquant sur « Envoyer ma demande », votre client mail va s'ouvrir avec vos coordonnées déjà remplies. Pensez à joindre votre document vous-même avant d'envoyer.</p>
+      </div>
+
+      <button type="submit" class="btn" id="soSubmitBtn">Envoyer ma demande</button>
+    </form>
+
+    <div class="callout" id="soConfirmation" style="display:none;margin-top:24px;">
+      <b>Demande prête à être envoyée</b>
+      <p>Si votre client mail s'est ouvert, ajoutez votre document en pièce jointe puis envoyez. <strong style="color:var(--text);">S'il ne s'est pas ouvert</strong> (ça arrive si aucune application mail n'est configurée par défaut sur votre ordinateur), copiez le message ci-dessous et envoyez-le vous-même à <strong style="color:var(--text);">contact@kompa-invest.fr</strong>, document en pièce jointe.</p>
+      <textarea id="soFallbackText" readonly style="width:100%;margin-top:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;line-height:1.6;min-height:160px;resize:vertical;"></textarea>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+        <button type="button" class="btn-ghost" id="soCopyBtn" style="cursor:pointer;">Copier le message</button>
+        <a href="#" id="soMailtoRetry" class="btn-ghost">Réessayer d'ouvrir mon client mail</a>
+      </div>
+      <div id="soCopyStatus" style="font-size:12px;color:var(--muted);margin-top:8px;display:none;">Message copié.</div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="xrayScreen" style="z-index:55;">
+  <div class="screen-topbar">
+    <button class="back-link" id="xrayBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour à l'accueil
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;max-width:760px;">
+    <div class="kicker">Comprendre mes investissements</div>
+    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 14px;">Simulez votre portefeuille combiné.</h2>
+    <p style="color:var(--muted);font-size:15px;line-height:1.6;max-width:660px;margin:0 0 20px;">Choisissez 2 à 4 produits déjà présents dans la bibliothèque du Décodeur, indiquez le montant investi dans chacun, et visualisez le résultat combiné : frais annuels moyens pondérés et répartition géographique globale de votre portefeuille.</p>
+
+    <div class="callout">
+      <b>Ce n'est pas un import automatique</b>
+      <p>Ce simulateur ne se connecte à aucun compte réel (assurance-vie, PEA, compte-titres). C'est une reconstitution manuelle : à vous de renseigner les produits que vous détenez, parmi ceux déjà couverts par le Décodeur, et les montants correspondants.</p>
+    </div>
+
+    <p style="font-size:12px;color:var(--muted);margin:0 0 28px;max-width:560px;">Kompa fournit de l'information calculée à partir de ce que vous saisissez. Kompa ne formule pas de conseil personnalisé et ne gère pas votre argent.</p>
+
+    <div class="result-card">
+      <div class="result-head"><h3 style="font-size:18px;">Ajouter une ligne à votre portefeuille</h3></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+        <input id="xrayQuery" type="text" list="xrayProductList" placeholder="ex. World, S&amp;P 500, Apple, SCPI..." style="flex:2;min-width:200px;padding:13px 18px;border-radius:100px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:14px;">
+        <datalist id="xrayProductList"></datalist>
+        <input id="xrayAmount" type="number" min="0" step="100" placeholder="Montant investi (€)" style="flex:1;min-width:170px;padding:13px 18px;border-radius:100px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:14px;">
+        <button id="xrayAddBtn" class="btn" style="border:none;">Ajouter au portefeuille</button>
+      </div>
+      <div id="xrayAddError" class="so-error" style="margin-top:10px;"></div>
+      <p class="xray-note">Maximum 4 produits par simulation. Le nom doit correspondre à un produit déjà présent dans le Décodeur (mêmes mots-clés de recherche).</p>
+    </div>
+
+    <div id="xrayList" style="margin-top:20px;"></div>
+
+    <div id="xrayResults" style="margin-top:20px;"></div>
+  </div>
+</div>
+
+<div class="screen" id="marketsScreen" style="z-index:55;">
+  <div class="screen-topbar">
+    <button class="back-link" id="marketsBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour à l'accueil
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;max-width:760px;">
+    <div class="kicker">Comprendre les marchés</div>
+    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 14px;">Pourquoi les marchés ont bougé récemment.</h2>
+    <p style="color:var(--muted);font-size:15px;line-height:1.6;max-width:660px;margin:0 0 20px;">Le pétrole, les taux, une décision de banque centrale : voici les mécanismes derrière quelques mouvements de marché récents, expliqués en langage clair plutôt qu'en simple pourcentage.</p>
+
+    <div class="callout">
+      <b>Ce que contient cette version</b>
+      <p>Ce prototype présente quatre épisodes réels, pour montrer le format prévu. En production, un nouvel épisode sera publié chaque semaine à partir de l'actualité du moment.</p>
+    </div>
+
+    <div class="mk-grid" id="marketsGrid"></div>
+  </div>
+</div>
+
+<div class="screen" id="marketEpisodeScreen" style="z-index:58;">
+  <div class="screen-topbar">
+    <button class="back-link" id="marketEpisodeBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+      Retour aux épisodes
+    </button>
+  </div>
+  <div class="wrap" style="padding:32px 24px 64px;max-width:680px;" id="marketEpisodeBody"></div>
+</div>
+
+<div class="wrap" style="padding:0 24px 64px;" id="incontournables">
+  <div style="border:1px solid var(--border);border-radius:20px;padding:44px;background:var(--card);">
+    <div class="kicker editable">Vous n'avez jamais investi ?</div>
+    <h2 class="serif editable" style="font-weight:480;font-size:28px;margin:0 0 10px;">Les incontournables à connaître avant de commencer.</h2>
+    <p class="editable" style="color:var(--muted);font-size:14px;max-width:600px;margin:0 0 32px;">Avant de vous parler produits, on vous explique les quelques notions qui changent vraiment la donne.</p>
+    <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+      <div class="concept-grid">
+        <div><b class="editable">Risque</b><span class="editable">Plus un placement peut rapporter, plus il peut aussi perdre de la valeur temporairement.</span></div>
+        <div><b class="editable">Diversification</b><span class="editable">Ne pas mettre tous vos œufs dans le même panier, ni dans des paniers qui se ressemblent trop.</span></div>
+        <div><b class="editable">Horizon</b><span class="editable">Le temps que vous pouvez laisser cet argent investi sans y toucher.</span></div>
+        <div><b class="editable">Intérêts composés</b><span class="editable">Vos gains génèrent eux-mêmes des gains, année après année.</span></div>
+        <div><b class="editable">Frais</b><span class="editable">Un petit pourcentage annuel qui pèse lourd une fois multiplié par les années.</span></div>
+        <div><b class="editable">Liquidité</b><span class="editable">La facilité, ou non, à récupérer votre argent quand vous en avez besoin.</span></div>
+      </div>
+    </div>
+    <a href="#" class="btn" style="display:inline-block;margin-top:32px;">Commencer mon parcours</a>
+  </div>
+</div>
+
+<div class="band">
+  <div class="phrase">
+    <span class="editable">Comprendre</span><span class="arrow">→</span>
+    <span class="editable">Comparer</span><span class="arrow">→</span>
+    <span class="editable" style="color:var(--accent);">Décider</span>
+  </div>
+  <p class="editable">Kompa ne choisit jamais à votre place. Nous fournissons ce qu'il faut savoir. Vous restez seul maître de la décision.</p>
+</div>
+
+<div class="wrap" style="padding:64px 24px;" id="commencer">
+  <div class="kicker editable">Prêt à essayer ?</div>
+  <h2 class="serif editable" style="font-weight:480;font-size:32px;margin:0 0 14px;">C'est un prototype de test.</h2>
+  <p class="editable" style="color:var(--muted);font-size:15px;max-width:520px;">Le Décodeur et Second Opinion sont déjà fonctionnels dans ce prototype. Les autres modules (Comprendre les marchés, Pourquoi mon portefeuille a bougé, Clarity Test) arrivent à l'étape de développement suivante.</p>
+</div>
+
+<footer>
+  <div class="logo" style="font-size:14px;"><span class="editable">Kompa</span></div>
+  <div class="editable">Kompa informe. Kompa ne conseille pas et ne gère pas votre argent.</div>
+</footer>
+
+<div class="drawer-backdrop" id="backdrop"></div>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" id="closeDrawer" aria-label="Fermer les réglages">✕</button>
+  <h2 class="serif">Apparence</h2>
+  <p class="sub">Vos choix sont mémorisés sur cet appareil.</p>
+
+  <div class="group-label">Fond</div>
+  <div class="swrow" id="bgRow"></div>
+
+  <div class="group-label">Texte</div>
+  <div class="swrow" id="textRow"></div>
+
+  <div class="group-label">Accent</div>
+  <div class="swrow" id="accentRow"></div>
+
+  <button class="btn-ghost" id="resetBtn" style="margin-top:28px;width:100%;">Réinitialiser</button>
+</div>
+
