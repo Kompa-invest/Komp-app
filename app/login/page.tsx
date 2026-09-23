@@ -63,6 +63,13 @@ function LoginForm() {
   if (signupDone) {
     return (
       <main className="max-w-md mx-auto px-6 py-20">
+        <Link
+          href="/"
+          className="text-xs mb-8 inline-flex items-center gap-1.5"
+          style={{ color: "var(--muted)" }}
+        >
+          ← Retour à l&apos;accueil
+        </Link>
         <div className="card">
           <div className="kicker mb-2">Compte créé</div>
           <h1 className="serif text-2xl font-medium mb-3">
@@ -89,7 +96,14 @@ function LoginForm() {
 
   return (
     <main className="max-w-md mx-auto px-6 py-20">
-      <div className="kicker mb-2">Kompa</div>
+      <Link
+        href="/"
+        className="text-xs mb-8 inline-flex items-center gap-1.5"
+        style={{ color: "var(--muted)" }}
+      >
+        ← Retour à l&apos;accueil
+      </Link>
+      <div className="kicker mb-2 mt-6">Kompa</div>
       <h1 className="serif text-3xl font-medium mb-8">
         {mode === "signin" ? "Se connecter" : "Créer un compte"}
       </h1>
@@ -171,10 +185,6 @@ function LoginForm() {
           </>
         )}
       </p>
-
-      <Link href="/" className="text-xs mt-8 block" style={{ color: "var(--muted)" }}>
-        ← Retour à l&apos;accueil
-      </Link>
     </main>
   );
 }
