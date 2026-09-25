@@ -178,3 +178,10 @@
   .mk-article h4{font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:var(--accent);margin:26px 0 10px;}
   .mk-article h4:first-child{margin-top:0;}
   .mk-article p{font-size:14px;line-height:1.65;color:var(--text);margin:0 0 10px;}
+
+  /* Second Opinion : consentement, anti-robots, erreur d'envoi */
+  .so-consent{display:flex;gap:10px;align-items:flex-start;margin:28px 0 0;font-size:13px;color:var(--muted);line-height:1.5;cursor:pointer;}
+  .so-consent input{margin-top:3px;flex-shrink:0;accent-color:var(--accent);}
+  .so-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}
+  #soSendError{margin:18px 0 0;}
+  #soForm .btn{margin-top:22px;}

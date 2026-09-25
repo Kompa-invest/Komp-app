@@ -1115,77 +1115,101 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  // Envoi du Second Opinion : le document part directement dans l'espace privé Kompa,
+  // puis Kompa reçoit un e-mail avec un lien vers le document.
+  function soSetSendError(msg){
+    var el = document.getElementById('soSendError');
+    if(!el) return;
+    el.textContent = msg || '';
+    el.classList.toggle('show', !!msg);
+  }
+  function soPostJson(url, payload){
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      return res.json().catch(function(){ return {}; }).then(function(data){
+        if(!res.ok) throw new Error(data.error || 'L\'envoi n\'a pas abouti. Réessayez dans quelques minutes.');
+        return data;
+      });
+    });
+  }
+  var soSending = false;
+
   if(soForm) soForm.addEventListener('submit', function(e){
     e.preventDefault();
+    if(soSending) return;
+    soSetSendError('');
+
     var name = document.getElementById('soName').value.trim();
     var email = document.getElementById('soEmail').value.trim();
     var phone = document.getElementById('soPhone').value.trim();
     var message = document.getElementById('soMessage').value.trim();
+    var consentEl = document.getElementById('soConsent');
+    var websiteEl = document.getElementById('soWebsite');
 
+    var fileOk = !!soSelectedFile;
     var nameOk = name.length > 0;
     var emailOk = soValidateEmail(email);
     var phoneOk = phone.replace(/[^0-9]/g,'').length >= 6;
+    var consentOk = !!(consentEl && consentEl.checked);
 
+    if(!fileOk){
+      soFileInfo.className = 'so-file-info error';
+      soFileInfo.style.display = 'block';
+      if(!soFileInfo.textContent || soFileInfo.textContent.indexOf('Fichier sélectionné') === 0){
+        soFileInfo.textContent = 'Ajoutez le document que vous avez reçu.';
+      }
+    }
     soShowError('soName','soNameError', !nameOk);
     soShowError('soEmail','soEmailError', !emailOk);
     soShowError('soPhone','soPhoneError', !phoneOk);
+    var consentErr = document.getElementById('soConsentError');
+    if(consentErr) consentErr.classList.toggle('show', !consentOk);
 
-    if(!nameOk || !emailOk || !phoneOk){
-      var firstInvalid = !nameOk ? 'soName' : (!emailOk ? 'soEmail' : 'soPhone');
-      document.getElementById(firstInvalid).focus();
-      if(soConfirmation) soConfirmation.style.display = 'none';
+    if(!fileOk || !nameOk || !emailOk || !phoneOk || !consentOk){
+      if(!fileOk){ soDropzone.focus(); }
+      else if(!nameOk){ document.getElementById('soName').focus(); }
+      else if(!emailOk){ document.getElementById('soEmail').focus(); }
+      else if(!phoneOk){ document.getElementById('soPhone').focus(); }
+      else if(consentEl){ consentEl.focus(); }
       return;
     }
 
-    var subject = 'Demande Second Opinion - ' + name;
-    var bodyLines = [
-      'Bonjour,',
-      '',
-      'Je souhaite une Second Opinion sur un document que j\'ai reçu.',
-      '',
-      'Nom complet : ' + name,
-      'E-mail : ' + email,
-      'Téléphone : ' + phone,
-      '',
-      'Ce que je voudrais que vous regardiez en priorité :',
-      message || 'Non précisé.',
-      '',
-      '(Le document est joint à cet e-mail.)',
-      '',
-      'Merci,',
-      name
-    ];
-    var mailto = 'mailto:contact@kompa-invest.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyLines.join('\n'));
-    window.location.href = mailto;
+    var file = soSelectedFile;
+    var ext = soFileExt(file.name);
+    var submitBtn = document.getElementById('soSubmitBtn');
+    var submitLabel = submitBtn ? submitBtn.textContent : '';
+    soSending = true;
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours…'; }
 
-    var fallbackText = document.getElementById('soFallbackText');
-    var mailtoRetry = document.getElementById('soMailtoRetry');
-    if(fallbackText) fallbackText.value = 'À : contact@kompa-invest.fr\nObjet : ' + subject + '\n\n' + bodyLines.join('\n');
-    if(mailtoRetry) mailtoRetry.setAttribute('href', mailto);
-
-    if(soConfirmation){
-      soConfirmation.style.display = 'block';
-      soConfirmation.scrollIntoView({behavior:'smooth', block:'nearest'});
-    }
-  });
-
-  var soCopyBtn = document.getElementById('soCopyBtn');
-  var soCopyStatus = document.getElementById('soCopyStatus');
-  if(soCopyBtn) soCopyBtn.addEventListener('click', function(){
-    var ta = document.getElementById('soFallbackText');
-    if(!ta) return;
-    function showCopied(){
-      if(soCopyStatus){ soCopyStatus.style.display = 'block'; setTimeout(function(){ soCopyStatus.style.display = 'none'; }, 2500); }
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(ta.value).then(showCopied).catch(function(){
-        ta.select();
-        try{ document.execCommand('copy'); showCopied(); }catch(e){}
+    soPostJson('/api/second-opinion/start', {
+      name: name, email: email, phone: phone, message: message,
+      fileName: file.name, fileSize: file.size, ext: ext,
+      consent: true, website: websiteEl ? websiteEl.value : ''
+    }).then(function(start){
+      var body = new FormData();
+      body.append('cacheControl', '3600');
+      body.append('', new File([file], 'proposition.' + ext, { type: start.contentType }));
+      var headers = { 'x-upsert': 'false' };
+      if(start.apiKey) headers.apikey = start.apiKey;
+      return fetch(start.uploadUrl, { method: 'PUT', headers: headers, body: body }).then(function(res){
+        if(!res.ok) throw new Error('Le document n\'a pas pu être envoyé. Vérifiez votre connexion et réessayez.');
+        return soPostJson('/api/second-opinion/finish', { id: start.id });
       });
-    } else {
-      ta.select();
-      try{ document.execCommand('copy'); showCopied(); }catch(e){}
-    }
+    }).then(function(){
+      soForm.style.display = 'none';
+      if(soConfirmation){
+        soConfirmation.style.display = 'block';
+        soConfirmation.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+    }).catch(function(err){
+      soSetSendError(err && err.message ? err.message : 'L\'envoi n\'a pas abouti. Réessayez dans quelques minutes.');
+    }).then(function(){
+      soSending = false;
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = submitLabel; }
+    });
   });
 
   document.addEventListener('keydown', function(e){
