@@ -185,3 +185,6 @@
   .so-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}
   #soSendError{margin:18px 0 0;}
   #soForm .btn{margin-top:22px;}
+
+  .concept-grid .concept-link{display:inline-block;margin-top:8px;font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;}
+  .concept-grid .concept-link:hover{text-decoration:underline;}
