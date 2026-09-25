@@ -40,3 +40,8 @@ on conflict (id) do update
   set public = false,
       file_size_limit = excluded.file_size_limit,
       allowed_mime_types = excluded.allowed_mime_types;
+
+-- Ajout (25/09/2026) : civilité et nom de famille, pour "Bonjour Madame Dupont".
+alter table public.second_opinion_requests
+  add column if not exists civility  text,
+  add column if not exists last_name text;

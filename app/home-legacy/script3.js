@@ -1142,7 +1142,10 @@
     if(soSending) return;
     soSetSendError('');
 
-    var name = document.getElementById('soName').value.trim();
+    var civilityEl = document.getElementById('soCivility');
+    var civility = civilityEl ? civilityEl.value : '';
+    var firstName = document.getElementById('soFirstName').value.trim();
+    var lastName = document.getElementById('soLastName').value.trim();
     var email = document.getElementById('soEmail').value.trim();
     var phone = document.getElementById('soPhone').value.trim();
     var message = document.getElementById('soMessage').value.trim();
@@ -1150,7 +1153,8 @@
     var websiteEl = document.getElementById('soWebsite');
 
     var fileOk = !!soSelectedFile;
-    var nameOk = name.length > 0;
+    var firstNameOk = firstName.length > 0;
+    var lastNameOk = lastName.length > 0;
     var emailOk = soValidateEmail(email);
     var phoneOk = phone.replace(/[^0-9]/g,'').length >= 6;
     var consentOk = !!(consentEl && consentEl.checked);
@@ -1162,15 +1166,17 @@
         soFileInfo.textContent = 'Ajoutez le document que vous avez reçu.';
       }
     }
-    soShowError('soName','soNameError', !nameOk);
+    soShowError('soFirstName','soFirstNameError', !firstNameOk);
+    soShowError('soLastName','soLastNameError', !lastNameOk);
     soShowError('soEmail','soEmailError', !emailOk);
     soShowError('soPhone','soPhoneError', !phoneOk);
     var consentErr = document.getElementById('soConsentError');
     if(consentErr) consentErr.classList.toggle('show', !consentOk);
 
-    if(!fileOk || !nameOk || !emailOk || !phoneOk || !consentOk){
+    if(!fileOk || !firstNameOk || !lastNameOk || !emailOk || !phoneOk || !consentOk){
       if(!fileOk){ soDropzone.focus(); }
-      else if(!nameOk){ document.getElementById('soName').focus(); }
+      else if(!firstNameOk){ document.getElementById('soFirstName').focus(); }
+      else if(!lastNameOk){ document.getElementById('soLastName').focus(); }
       else if(!emailOk){ document.getElementById('soEmail').focus(); }
       else if(!phoneOk){ document.getElementById('soPhone').focus(); }
       else if(consentEl){ consentEl.focus(); }
@@ -1185,7 +1191,8 @@
     if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours…'; }
 
     soPostJson('/api/second-opinion/start', {
-      name: name, email: email, phone: phone, message: message,
+      civility: civility, firstName: firstName, lastName: lastName,
+      email: email, phone: phone, message: message,
       fileName: file.name, fileSize: file.size, ext: ext,
       consent: true, website: websiteEl ? websiteEl.value : ''
     }).then(function(start){

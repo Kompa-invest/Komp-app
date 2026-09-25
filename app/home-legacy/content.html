@@ -240,9 +240,20 @@
       <label class="so-label" for="soMessage">Que voulez-vous qu'on regarde en priorité ? (facultatif)</label>
       <textarea class="so-field" id="soMessage" rows="4" placeholder="Par exemple : les frais, le risque de perte, les conditions pour récupérer mon argent..."></textarea>
 
-      <label class="so-label" for="soName">Nom complet *</label>
-      <input class="so-field" type="text" id="soName" autocomplete="name">
-      <div class="so-error" id="soNameError">Merci d'indiquer votre nom complet.</div>
+      <label class="so-label" for="soCivility">Civilité (facultatif)</label>
+      <select class="so-field" id="soCivility">
+        <option value="">Ne pas préciser</option>
+        <option value="Madame">Madame</option>
+        <option value="Monsieur">Monsieur</option>
+      </select>
+
+      <label class="so-label" for="soFirstName">Prénom *</label>
+      <input class="so-field" type="text" id="soFirstName" autocomplete="given-name">
+      <div class="so-error" id="soFirstNameError">Merci d'indiquer votre prénom.</div>
+
+      <label class="so-label" for="soLastName">Nom *</label>
+      <input class="so-field" type="text" id="soLastName" autocomplete="family-name">
+      <div class="so-error" id="soLastNameError">Merci d'indiquer votre nom.</div>
 
       <label class="so-label" for="soEmail">E-mail *</label>
       <input class="so-field" type="email" id="soEmail" autocomplete="email">

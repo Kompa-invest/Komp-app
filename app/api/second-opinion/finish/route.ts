@@ -78,6 +78,10 @@ export async function POST(req: Request) {
   }
 
   const notifyTo = process.env.SO_NOTIFY_TO ?? process.env.SMTP_USER ?? "";
+  // "Bonjour Madame Dupont," si la civilité est indiquée, sinon "Bonjour Marie Dupont,".
+  const greetingName =
+    row.civility && row.last_name ? `${row.civility} ${row.last_name}` : row.full_name;
+  const displayName = row.civility ? `${row.civility} ${row.full_name}` : row.full_name;
   const deadline = frDate(addBusinessDays(now, 2));
   const expires = frDate(new Date(now.getTime() + SO_DOCUMENT_DAYS * 24 * 3600 * 1000));
 
@@ -85,10 +89,10 @@ export async function POST(req: Request) {
     sendMail({
       to: notifyTo,
       replyTo: row.email,
-      subject: `Second Opinion : ${row.full_name}`,
+      subject: `Second Opinion : ${displayName}`,
       text:
         `Nouvelle demande de Second Opinion.\n\n` +
-        `Nom : ${row.full_name}\n` +
+        `Nom : ${displayName}\n` +
         `E-mail : ${row.email}\n` +
         `Téléphone : ${row.phone}\n` +
         `Fichier : ${row.file_name ?? "document"}\n\n` +
@@ -103,7 +107,7 @@ export async function POST(req: Request) {
       replyTo: notifyTo,
       subject: "Kompa : votre document est bien reçu",
       text:
-        `Bonjour ${row.full_name},\n\n` +
+        `Bonjour ${greetingName},\n\n` +
         `Nous avons bien reçu votre document. Vous recevrez une seconde lecture à cette adresse ` +
         `sous 48 heures ouvrées.\n\n` +
         `Votre document est conservé dans un espace privé, uniquement pour cette analyse, ` +

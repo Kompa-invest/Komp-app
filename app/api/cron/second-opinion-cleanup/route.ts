@@ -62,7 +62,16 @@ export async function GET(req: Request) {
 
   const { data: anonymized } = await supabase
     .from(SO_TABLE)
-    .update({ full_name: null, email: null, phone: null, message: null, file_name: null, anonymized_at: nowIso })
+    .update({
+      full_name: null,
+      civility: null,
+      last_name: null,
+      email: null,
+      phone: null,
+      message: null,
+      file_name: null,
+      anonymized_at: nowIso,
+    })
     .is("anonymized_at", null)
     .lt("created_at", ago(SO_ANONYMIZE_DAYS * 86400 * 1000))
     .select("id");

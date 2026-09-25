@@ -35,7 +35,10 @@ export async function POST(req: Request) {
   // Champ piège invisible : un humain le laisse vide, un robot le remplit.
   if (text(body.website, 200)) return fail(400, "Requête invalide.");
 
-  const name = text(body.name, 120);
+  const civilityRaw = text(body.civility, 20);
+  const civility = civilityRaw === "Madame" || civilityRaw === "Monsieur" ? civilityRaw : null;
+  const firstName = text(body.firstName, 60);
+  const lastName = text(body.lastName, 60);
   const email = text(body.email, 254).toLowerCase();
   const phone = text(body.phone, 40);
   const message = text(body.message, 3000);
@@ -43,7 +46,8 @@ export async function POST(req: Request) {
   const fileName = text(body.fileName, 200).replace(/[^\p{L}\p{N}._ ()-]/gu, "");
   const fileSize = Number(body.fileSize);
 
-  if (!name) return fail(400, "Merci d'indiquer votre nom complet.");
+  if (!firstName) return fail(400, "Merci d'indiquer votre prénom.");
+  if (!lastName) return fail(400, "Merci d'indiquer votre nom.");
   if (!EMAIL_RE.test(email)) return fail(400, "Merci d'indiquer une adresse e-mail valide.");
   if (phone.replace(/[^0-9]/g, "").length < 6) return fail(400, "Merci d'indiquer votre numéro de téléphone.");
   if (body.consent !== true) return fail(400, "Merci de cocher la case d'accord pour l'utilisation de votre document.");
@@ -73,7 +77,9 @@ export async function POST(req: Request) {
 
   const { error: insertError } = await supabase.from(SO_TABLE).insert({
     id,
-    full_name: name,
+    full_name: `${firstName} ${lastName}`,
+    civility,
+    last_name: lastName,
     email,
     phone,
     message: message || null,
