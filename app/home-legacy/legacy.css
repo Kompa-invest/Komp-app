@@ -211,3 +211,12 @@
   .ctp-gross{fill:none;stroke:var(--text);stroke-width:1.2;stroke-dasharray:4 4;vector-effect:non-scaling-stroke;}
   .ctp-rows div{align-content:space-between;}
   @media (max-width:520px){.calc-teaser{padding:28px 22px;}.calc-teaser h2{font-size:24px;}}
+
+  /* Logo : version claire par défaut, version pour fond sombre en mode sombre */
+  .logo-img{display:block;height:28px;width:auto;}
+  .logo-img-sm{height:20px;}
+  .logo-dark{display:none;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .logo-light{display:none;}
+    :root:not([data-theme="light"]) .logo-dark{display:block;}
+  }
