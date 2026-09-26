@@ -188,3 +188,26 @@
 
   .concept-grid .concept-link{display:inline-block;margin-top:8px;font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;}
   .concept-grid .concept-link:hover{text-decoration:underline;}
+
+  /* Bloc d'accueil du calculateur d'intérêts composés */
+  .calc-teaser{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;border:1px solid var(--border);border-radius:20px;padding:44px;background:var(--card);color:inherit;text-decoration:none;transition:border-color .15s ease;}
+  .calc-teaser:hover{border-color:var(--accent);}
+  .calc-teaser:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
+  @media (min-width:860px){.calc-teaser{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;}}
+  .calc-teaser h2{font-weight:480;font-size:28px;margin:10px 0 10px;}
+  .calc-teaser p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 24px;max-width:520px;}
+  .calc-teaser-cta{display:inline-block;padding:13px 24px;border-radius:100px;background:var(--accent);color:#fff;font-weight:500;font-size:14px;}
+  .calc-teaser-preview{border:1px solid var(--border);border-radius:16px;background:var(--bg);padding:22px 22px 0;overflow:hidden;}
+  .ctp-rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .ctp-rows div{display:grid;gap:2px;}
+  .ctp-rows span,.ctp-result span{font-size:11px;color:var(--muted);}
+  .ctp-rows b{font-size:14px;font-weight:500;}
+  .ctp-result{margin-top:16px;display:grid;gap:2px;}
+  .ctp-result b{font-size:34px;font-weight:560;line-height:1.1;}
+  .ctp-chart{display:block;width:calc(100% + 44px);margin:14px -22px 0;height:110px;}
+  .ctp-paid{fill:color-mix(in srgb,var(--text) 14%,transparent);}
+  .ctp-simple{fill:color-mix(in srgb,var(--accent) 45%,transparent);}
+  .ctp-snow{fill:var(--accent);}
+  .ctp-gross{fill:none;stroke:var(--text);stroke-width:1.2;stroke-dasharray:4 4;vector-effect:non-scaling-stroke;}
+  .ctp-rows div{align-content:space-between;}
+  @media (max-width:520px){.calc-teaser{padding:28px 22px;}.calc-teaser h2{font-size:24px;}}
