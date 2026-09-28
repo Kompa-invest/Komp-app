@@ -220,3 +220,13 @@
     :root:not([data-theme="light"]) .logo-light{display:none;}
     :root:not([data-theme="light"]) .logo-dark{display:block;}
   }
+
+  /* Bloc d'accueil du Magazine */
+  .mag-preview{border:1px solid var(--border);border-radius:16px;background:var(--bg);padding:22px 26px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+  .mp-top{width:100%;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .mp-top span:last-child{color:var(--text);font-weight:600}
+  .mp-logo{height:40px;width:auto;margin-top:8px}
+  .mp-sub{font-size:10px;letter-spacing:.4em;text-transform:uppercase;font-weight:600}
+  .mp-rule{width:100%;border-top:2px solid var(--text);border-bottom:1px solid var(--text);height:4px;margin:10px 0 8px}
+  .mp-kick{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .mp-title{font-size:20px;font-weight:500;line-height:1.25}
