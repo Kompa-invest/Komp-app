@@ -167,19 +167,31 @@ details.plus[open] .ic{transform:rotate(45deg)}
 
 .thumb-n{display:flex;align-items:center;justify-content:center;background:var(--vl);color:var(--v);font-family:var(--serif);font-size:64px;letter-spacing:-.03em}
 .latest-n{display:flex;align-items:center;justify-content:center;background:var(--vl);color:var(--v);font-family:var(--serif);font-size:120px;letter-spacing:-.04em;min-height:260px}
+
+.lead-link{color:inherit;text-decoration:none}.lead-link:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.lead-cta{margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 24px;background:var(--ink);color:var(--bg)!important;border-radius:12px;text-decoration:none;transition:background .2s ease}
+.lead-cta:hover{background:var(--vd)}
+.lead-cta:focus-visible{outline:2px solid var(--v);outline-offset:3px}
+.lc-l{display:flex;flex-direction:column;gap:4px}
+.lc-l b{font-family:var(--serif);font-size:21px;font-weight:500}
+.lc-l em{font-style:normal;font-size:13px;color:#D9D2C3}
+.lc-r{display:flex;align-items:center;gap:12px;font-size:14px;white-space:nowrap}
+.lc-r .arr{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--bg);color:var(--ink);font-size:18px;transition:transform .2s ease}
+.lead-cta:hover .arr{transform:translateX(4px)}
+@media (max-width:520px){.lc-l em{display:none}}
 </style>
 </head>
 <body>
 <header class="site"><a class="logo" href="/"><img src="/kompa-logo.png" alt="Kompa"></a>
 <nav class="site-nav" aria-label="Kompa"><a href="/#decodeur-tool">Décodeur</a><a href="/#second-opinion-tool">Second Opinion</a><a href="/#comprendre">Mes investissements</a><a href="#une" class="on">Le Magazine</a></nav>
 <a class="btn" href="/portfolio">Mon portefeuille</a></header>
-<div class="mast"><div class="mast-line"><span>Lundi 28 septembre 2026</span><span>Information, jamais de conseil</span><span>N°4</span></div>
+<div class="mast"><div class="mast-line"><span>Lundi 28 septembre 2026</span><span>N°4</span></div>
 <a class="mast-logo" href="#une"><img src="/kompa-logo.png" alt="Kompa"><span>Le Magazine</span></a>
 <nav class="tabs" aria-label="Rubriques du Magazine"><a href="#une" data-tab="une">À la une</a><a href="#marches" data-tab="marches">Marchés</a><a href="#glossaire" data-term="Le spread" data-tab="mot">Le mot de la semaine</a><a href="#glossaire" data-tab="glossaire">Glossaire</a></nav></div>
 <main>
 <div class="page" id="p-une" hidden>
 <div class="une">
-<article class="lead"><span class="kick">Marchés · L'édition de la semaine · N°4</span><h1>Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</h1><p class="chapo">Le baril fait le yo-yo au rythme des nouvelles du Moyen-Orient. L'Europe accélère, la France hésite, et le CAC 40 met fin à six semaines de baisse.</p>
+<article class="lead"><span class="kick">Marchés · L'édition de la semaine · N°4</span><h1><a class="lead-link" href="#n4">Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</a></h1><p class="chapo">Le baril fait le yo-yo au rythme des nouvelles du Moyen-Orient. L'Europe accélère, la France hésite, et le CAC 40 met fin à six semaines de baisse.</p>
 <figure class="chart mini"><div class="chart-h"><strong>L'Europe accélère, la France hésite</strong><span>Indice PMI composite de la zone euro et indicateur du climat des affaires de l'Insee, août et septembre 2026</span></div><svg viewBox="0 0 896 250" width="100%" role="img" aria-label="En septembre, l'indice PMI de la zone euro passe de 52,0 à 53,1, au-dessus du seuil de 50 ; le climat des affaires en France recule de 98 à 96, sous sa moyenne de 100.">
 <text x="276" y="58" text-anchor="end" font-size="15" font-weight="600" fill="#1B1913" font-family="IBM Plex Sans, sans-serif">Activité, zone euro</text>
 <text x="276" y="78" text-anchor="end" font-size="12" fill="#5E584C" font-family="IBM Plex Sans, sans-serif">Indice PMI composite</text>
@@ -202,7 +214,7 @@ details.plus[open] .ic{transform:rotate(45deg)}
 <text x="624.0" y="144" text-anchor="middle" font-size="12" fill="#5E584C" font-family="IBM Plex Sans, sans-serif">août 98</text>
 <text x="516.0" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#4F3C69" font-family="IBM Plex Sans, sans-serif">sept. 96</text>
 </svg></figure>
-<div class="lead-reps"><div><strong>Brent, jeudi 24 septembre</strong><span>Plus haut depuis le 15 septembre, avant un repli vendredi.</span></div><div><strong>CAC 40, semaine du 21 au 25 septembre</strong><span>Après six semaines de baisse d'affilée (−7,46 %).</span></div><div><strong>Activité, zone euro (PMI)</strong><span>Au-dessus de 50, l'activité progresse.</span></div></div><a class="more" href="#n4">Lire l'édition N°4 →</a></article>
+<div class="lead-reps"><div><strong>Brent, jeudi 24 septembre</strong><span>Plus haut depuis le 15 septembre, avant un repli vendredi.</span></div><div><strong>CAC 40, semaine du 21 au 25 septembre</strong><span>Après six semaines de baisse d'affilée (−7,46 %).</span></div><div><strong>Activité, zone euro (PMI)</strong><span>Au-dessus de 50, l'activité progresse.</span></div></div><a class="lead-cta" href="#n4"><span class="lc-l"><b>Lire l'édition N°4 en entier</b><em>Le cap, les repères, les vents dominants, votre épargne et le mot de la semaine</em></span><span class="lc-r">4 min <span class="arr" aria-hidden="true">→</span></span></a></article>
 <aside class="side"><section class="side-mot"><span class="kick">Le mot de la semaine</span><strong>Le spread</strong><p>Le spread désigne l'écart entre deux prix, deux taux d'intérêt ou deux rendements.</p><a href="#glossaire" data-term="Le spread">Voir dans le glossaire →</a></section>
 <section class="news"><strong>Recevez l'édition chaque lundi</strong><span>Un e-mail, quatre minutes, sans jargon.</span><label for="nl" class="sr">Votre e-mail</label><input id="nl" type="email" placeholder="Votre e-mail" disabled><button type="button" disabled>Bientôt disponible</button></section></aside>
 </div>
