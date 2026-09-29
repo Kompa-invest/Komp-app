@@ -230,3 +230,14 @@
   .mp-rule{width:100%;border-top:2px solid var(--text);border-bottom:1px solid var(--text);height:4px;margin:10px 0 8px}
   .mp-kick{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
   .mp-title{font-size:20px;font-weight:500;line-height:1.25}
+
+  /* Fiches produits : texte justifié, avec césure pour éviter les grands blancs */
+  .result-block p,.result-block li{text-align:justify;-webkit-hyphens:auto;hyphens:auto;}
+
+  /* Lexique des fiches (Décodeur) */
+  .lex-group{margin-top:36px;max-width:900px}
+  .lex-h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;padding-bottom:10px;margin-bottom:18px;border-bottom:1px solid var(--border)}
+  .lex-grid{gap:22px 32px}
+  @media (min-width:960px){.lex-grid{grid-template-columns:repeat(2,1fr)}}
+  .lex-more{margin:40px 0 0;padding-top:18px;border-top:1px solid var(--border);font-size:14px;color:var(--muted);max-width:900px}
+  .lex-more a{color:var(--accent);font-weight:600}

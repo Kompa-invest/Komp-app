@@ -107,10 +107,10 @@
   </div>
 
   <p style="font-size:13px;color:var(--muted);margin:8px 0 28px;">
-    Pas encore familier avec les ETF, les actions ou les obligations ?
+    Un terme d'une fiche vous échappe (ISIN, frais courants, réplication…) ?
     <button id="glossaryOpen" class="glossary-link">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      Retrouvez des explications simples dans notre glossaire
+      Ouvrir le lexique des fiches
     </button>
   </p>
 
@@ -178,19 +178,57 @@
     </button>
   </div>
   <div class="wrap" style="padding:32px 24px 64px;">
-    <div class="kicker">Glossaire</div>
-    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 24px;">Les mots qui reviennent souvent.</h2>
-    <div class="concept-grid" style="grid-template-columns:1fr;max-width:640px;">
-      <div><b>Indice</b><span>Une mesure de la performance d'un ensemble de valeurs (par exemple 500 entreprises), sans être un produit qu'on achète directement.</span></div>
-      <div><b>ETF</b><span>Un produit coté en bourse qui cherche à reproduire la performance d'un indice, en détenant réellement (ou via un contrat) les actifs qui le composent.</span></div>
-      <div><b>Risque</b><span>Plus un placement peut rapporter, plus il peut aussi perdre de la valeur temporairement.</span></div>
-      <div><b>Diversification</b><span>Ne pas mettre tous ses œufs dans le même panier, ni dans des paniers qui se ressemblent trop.</span></div>
-      <div><b>Horizon</b><span>Le temps que vous pouvez laisser cet argent investi sans y toucher.</span></div>
-      <div><b>Frais (TER)</b><span>Le coût annuel du produit, exprimé en pourcentage, prélevé automatiquement sur la performance.</span></div>
-      <div><b>Liquidité</b><span>La facilité, ou non, à récupérer votre argent quand vous en avez besoin.</span></div>
-      <div><b>Réplication physique</b><span>L'ETF détient réellement les actions ou obligations de l'indice qu'il suit.</span></div>
-      <div><b>Réplication synthétique</b><span>L'ETF passe par un contrat avec une banque pour reproduire la performance de l'indice, sans détenir directement les titres.</span></div>
+    <div class="kicker">Lexique des fiches</div>
+    <h2 class="serif" style="font-weight:480;font-size:32px;margin:10px 0 8px;">Les mots qu'on lit sur une fiche produit.</h2>
+    <p style="font-size:15px;color:var(--muted);line-height:1.6;margin:0 0 8px;max-width:640px;">Un terme du Décodeur vous échappe ? Le voici expliqué simplement.</p>
+    <div class="lex-group">
+      <div class="lex-h">Identifier le produit</div>
+      <div class="concept-grid lex-grid">
+        <div><b>ISIN</b><span>Le code de 12 caractères qui identifie un titre ou un fonds de façon unique dans le monde. Les deux premières lettres indiquent le pays d'enregistrement : IE pour l'Irlande, LU pour le Luxembourg, FR pour la France.</span></div>
+        <div><b>Ticker</b><span>Le code court sous lequel un titre est coté sur une place de Bourse. Un même ETF peut avoir un ticker différent selon la Bourse où il s'échange.</span></div>
+        <div><b>Société de gestion</b><span>L'entreprise qui crée et gère le fonds, par exemple iShares, Amundi ou Vanguard.</span></div>
+        <div><b>UCITS (OPCVM)</b><span>Le cadre européen des fonds destinés aux particuliers : règles de diversification, de transparence et de protection des investisseurs. En français, on parle d'OPCVM.</span></div>
+      </div>
     </div>
+    <div class="lex-group">
+      <div class="lex-h">Comment le fonds suit son indice</div>
+      <div class="concept-grid lex-grid">
+        <div><b>Indice de référence</b><span>L'indice que le fonds cherche à reproduire, par exemple le MSCI World ou le CAC 40.</span></div>
+        <div><b>Réplication physique</b><span>Le fonds détient réellement les titres de l'indice : tous (réplication totale) ou un échantillon représentatif (réplication optimisée).</span></div>
+        <div><b>Réplication synthétique</b><span>Le fonds reproduit la performance de l'indice grâce à un contrat d'échange (swap) avec une banque, sans détenir directement les titres. Si cette banque ne tenait pas ses engagements, le fonds pourrait subir une perte : c'est le risque de contrepartie, encadré par la réglementation européenne.</span></div>
+        <div><b>Écart de suivi</b><span>L'écart entre la performance du fonds et celle de son indice. Plus il est faible, plus le fonds colle fidèlement à l'indice. Les frais en font partie.</span></div>
+        <div><b>Nombre de lignes</b><span>Le nombre de titres différents détenus par le fonds. Il donne une première idée de sa diversification.</span></div>
+        <div><b>Poids des dix premières lignes</b><span>La part du fonds représentée par ses dix plus grosses positions. Plus elle est élevée, plus le fonds dépend de quelques entreprises.</span></div>
+      </div>
+    </div>
+    <div class="lex-group">
+      <div class="lex-h">Ce que vous payez et ce que vous recevez</div>
+      <div class="concept-grid lex-grid">
+        <div><b>Frais courants (TER)</b><span>Le coût annuel du fonds, exprimé en pourcentage et prélevé directement sur sa valeur. Vous ne le payez pas à part : il réduit la performance.</span></div>
+        <div><b>Frais de courtage</b><span>Les frais facturés par votre banque ou votre courtier à chaque achat ou vente. Ils ne sont pas compris dans les frais courants du fonds.</span></div>
+        <div><b>Écart acheteur-vendeur</b><span>La différence entre le prix auquel on peut acheter et celui auquel on peut vendre, à un instant donné. Plus il est faible, moins un aller-retour coûte cher.</span></div>
+        <div><b>Capitalisation (Acc)</b><span>Les dividendes perçus par le fonds sont réinvestis automatiquement : ils font grossir sa valeur au lieu de vous être versés.</span></div>
+        <div><b>Distribution (Dist)</b><span>Les dividendes perçus par le fonds vous sont versés régulièrement.</span></div>
+        <div><b>Encours</b><span>Le montant total d'argent investi dans le fonds. Un encours élevé est souvent le signe d'un fonds bien établi, sans rien garantir de sa performance.</span></div>
+      </div>
+    </div>
+    <div class="lex-group">
+      <div class="lex-h">Les monnaies</div>
+      <div class="concept-grid lex-grid">
+        <div><b>Devise de cotation</b><span>La monnaie dans laquelle le fonds s'achète et se vend en Bourse. Elle ne dit rien de son exposition réelle : un fonds coté en euros peut être investi en actions américaines.</span></div>
+        <div><b>Risque de change</b><span>Quand un fonds détient des actifs dans une autre monnaie que l'euro, les variations de cette monnaie modifient sa valeur en euros, à la hausse comme à la baisse.</span></div>
+        <div><b>Couverture de change (Hedged)</b><span>Un mécanisme qui neutralise en grande partie l'effet des variations de change. Les parts couvertes portent souvent la mention « Hedged » et coûtent en général un peu plus cher.</span></div>
+      </div>
+    </div>
+    <div class="lex-group">
+      <div class="lex-h">Risque et éligibilité</div>
+      <div class="concept-grid lex-grid">
+        <div><b>Indicateur de risque (SRI)</b><span>La note de 1 à 7 du document d'informations clés, qui résume le niveau de risque du produit. Plus elle est élevée, plus le risque est grand.</span></div>
+        <div><b>Éligible PEA</b><span>Le fonds peut être logé dans un plan d'épargne en actions, parce qu'il investit une part minimale de son portefeuille en actions européennes.</span></div>
+        <div><b>Répartition géographique et sectorielle</b><span>La façon dont le fonds répartit ses investissements entre pays et entre secteurs d'activité. Elle montre où l'argent est réellement placé.</span></div>
+      </div>
+    </div>
+    <p class="lex-more">Pour les notions générales (risque, diversification, horizon de placement…), consultez <a href="/magazine#glossaire">le glossaire du Magazine →</a></p>
   </div>
 </div>
 
@@ -399,7 +437,7 @@
         <div><b class="editable">Liquidité</b><span class="editable">La facilité, ou non, à récupérer votre argent quand vous en avez besoin.</span></div>
       </div>
     </div>
-    <a href="#" class="btn" style="display:inline-block;margin-top:32px;">Commencer mon parcours</a>
+    <a href="/magazine#glossaire" class="btn" style="display:inline-block;margin-top:32px;">Découvrir les 30 notions clés →</a>
   </div>
 </div>
 
