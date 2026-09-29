@@ -804,6 +804,17 @@
   });
   if(xrayBack) xrayBack.addEventListener('click', closeXray);
 
+  // Ouvre directement un outil quand on arrive avec un lien du type /#decodeur-tool
+  // (par exemple depuis le menu du Magazine).
+  function openFromHash(){
+    var h = window.location.hash;
+    if(h === '#decodeur-tool') openScreen();
+    else if(h === '#second-opinion-tool') openSecondOpinion();
+    else if(h === '#xray-tool') openXray();
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
   if(xrayProductList){
     xrayProductList.innerHTML = FUNDS.map(function(f){ return '<option value="' + f.name + '">'; }).join('');
   }
