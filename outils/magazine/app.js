@@ -1,7 +1,7 @@
 (function(){
   var IMGS=__IMGS__;
   document.querySelectorAll('img[data-img]').forEach(function(im){var k=im.getAttribute('data-img');if(IMGS[k])im.src=IMGS[k];});
-  var pages=['une','marches','n1','n2','n3','n4','mots','glossaire'];
+  var pages=['une','marches','n1','n2','n3','n4','n5','mots','glossaire'];
   var pendingTerm=null, pendingJump=null;
   function show(){
     var h=(location.hash||'#une').slice(1); if(pages.indexOf(h)<0) h='une';

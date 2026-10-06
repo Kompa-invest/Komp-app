@@ -99,3 +99,38 @@ def dumbbell():
         o.append(f'<text x="{f(X(v1))}" y="{y-16}" text-anchor="middle" font-size="12" fill="#5E584C" {FONT}>août {l1}</text>')
         o.append(f'<text x="{f(X(v2))}" y="{y-16}" text-anchor="middle" font-size="13" font-weight="600" fill="#4F3C69" {FONT}>sept. {l2}</text>')
     o.append('</svg>'); return "\n".join(o)
+
+def taux_fr_de():
+    W,H=896,300; x0,x1=64,760; y0,y1=30,250
+    dates=["ven. 25/09","lun. 28/09","mar. 29/09","mer. 30/09","jeu. 1er/10","ven. 2/10"]
+    fr=[4.73,4.78,4.81,4.86,4.92,4.86]; de=[3.62,3.64,3.61,3.58,3.52,3.45]
+    ymin,ymax=3.2,5.2
+    X=lambda i: x0+i/(len(dates)-1)*(x1-x0); Y=lambda v: y0+(ymax-v)/(ymax-ymin)*(y1-y0)
+    pf=" ".join(f"{'M' if i==0 else 'L'}{f(X(i))},{f(Y(v))}" for i,v in enumerate(fr))
+    pd=" ".join(f"{'M' if i==0 else 'L'}{f(X(i))},{f(Y(v))}" for i,v in enumerate(de))
+    band=pf+" "+" ".join(f"L{f(X(i))},{f(Y(de[i]))}" for i in range(len(de)-1,-1,-1))+" Z"
+    o=[f'<svg viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="Du 25 septembre au 2 octobre 2026, le taux à 10 ans de la France passe de 4,73 % à 4,86 % (4,92 % le 1er octobre), celui de l\'Allemagne de 3,62 % à 3,45 %. L\'écart passe de 1,11 à 1,40 point.">']
+    for v,l in [(3.5,"3,5 %"),(4.0,"4 %"),(4.5,"4,5 %"),(5.0,"5 %")]:
+        o.append(f'<line x1="{x0}" y1="{f(Y(v))}" x2="{x1}" y2="{f(Y(v))}" stroke="#D6CCB6" stroke-dasharray="2 5"></line>')
+        o.append(f'<text x="{x0-12}" y="{f(Y(v)+4)}" text-anchor="end" font-size="12" fill="#8A8370" {FONT}>{l}</text>')
+    o.append(f'<line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke="#B7B09B"></line>')
+    for i,d in enumerate(dates):
+        o.append(f'<text x="{f(X(i))}" y="{y1+24}" text-anchor="middle" font-size="12" fill="#3E3A31" {FONT}>{d}</text>')
+    o.append(f'<path d="{band}" fill="#8E72A8" fill-opacity="0.10"></path>')
+    o.append(f'<path d="{pd}" fill="none" stroke="#8E72A8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>')
+    o.append(f'<path d="{pf}" fill="none" stroke="#4F3C69" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"></path>')
+    for i in range(len(dates)):
+        o.append(f'<circle cx="{f(X(i))}" cy="{f(Y(fr[i]))}" r="4" fill="#4F3C69"></circle><circle cx="{f(X(i))}" cy="{f(Y(de[i]))}" r="3.5" fill="#8E72A8"></circle>')
+    o.append(f'<text x="{f(X(0))}" y="{f(Y(fr[0])-14)}" font-size="13" fill="#3E3A31" {FONT}>4,73 %</text>')
+    o.append(f'<text x="{f(X(0))}" y="{f(Y(de[0])+24)}" font-size="13" fill="#3E3A31" {FONT}>3,62 %</text>')
+    o.append(f'<text x="{f(X(4))}" y="{f(Y(fr[4])-14)}" text-anchor="middle" font-size="13" font-weight="600" fill="#4F3C69" {FONT}>4,92 %</text>')
+    xe=X(5)
+    o.append(f'<text x="{f(xe+14)}" y="{f(Y(fr[5])+5)}" font-size="14" font-weight="600" fill="#4F3C69" {FONT}>France 4,86 %</text>')
+    o.append(f'<text x="{f(xe+14)}" y="{f(Y(de[5])+5)}" font-size="14" font-weight="600" fill="#6E5690" {FONT}>Allemagne 3,45 %</text>')
+    ym=(Y(fr[5])+Y(de[5]))/2
+    o.append(f'<line x1="{f(xe+6)}" y1="{f(Y(fr[5])+12)}" x2="{f(xe+6)}" y2="{f(Y(de[5])-12)}" stroke="#4F3C69" stroke-width="1.5" stroke-dasharray="3 3"></line>')
+    o.append(f'<rect x="{f(xe+14)}" y="{f(ym-22)}" width="118" height="44" rx="10" fill="#4F3C69"></rect>')
+    o.append(f'<text x="{f(xe+26)}" y="{f(ym-4)}" font-size="12" fill="#E7DDF0" {FONT}>Écart au 2 oct.</text>')
+    o.append(f'<text x="{f(xe+26)}" y="{f(ym+14)}" font-size="15" font-weight="600" fill="#FFFFFF" {FONT}>1,40 point</text>')
+    o.append(f'<text x="{f(X(0)+70)}" y="{f((Y(fr[0])+Y(de[0]))/2+5)}" font-size="12" fill="#6E5690" {FONT}>écart 1,11 point</text>')
+    o.append('</svg>'); return "\n".join(o)

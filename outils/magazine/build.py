@@ -3,14 +3,14 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]  # racine du dépôt Komp-app
 PUBLIC = len(sys.argv)>1 and sys.argv[1]=='public'
-CONFIRMED={'warsh','bourse','eurosign','europiece','raffinerie'}
+CONFIRMED={'warsh','bourse','eurosign','europiece','raffinerie','bercy'}
 sys.path.insert(0,str(HERE))
 import charts
 from content import E
 def b64(p): return base64.b64encode(open(p,'rb').read()).decode()
-IMG={k:str(ROOT/"public"/"magazine"/"img"/f"{k}.jpg") for k in ["raffinerie","bourse","eurosign","europiece","warsh"]}
+IMG={k:str(ROOT/"public"/"magazine"/"img"/f"{k}.jpg") for k in ["bercy","raffinerie","bourse","eurosign","europiece","warsh"]}
 LOGO=b64(str(ROOT/'public'/'kompa-logo.png'))
-CH={"fed":charts.fed(),"bce":charts.bce(),"inflation":charts.inflation(),"dumbbell":charts.dumbbell()}
+CH={"fed":charts.fed(),"bce":charts.bce(),"inflation":charts.inflation(),"dumbbell":charts.dumbbell(),"taux_fr_de":charts.taux_fr_de()}
 hl=lambda text,frag: text.replace(frag,f'<mark>{frag}</mark>',1)
 def img(key,alt,cls): return f'<img data-img="{key}" alt="{alt}" class="{cls}">'
 def compass(a): return f'<svg class="cmp" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5"></circle><g transform="rotate({a} 10 10)"><path class="nb" d="M10 3.5 L12 10 L10 16.5 L8 10 Z"></path><path class="nt" d="M10 3.5 L12 10 L8 10 Z"></path></g><circle class="ctr" cx="10" cy="10" r="1.2"></circle></svg>'
@@ -58,16 +58,16 @@ def edition(e):
     return s.replace('{ed}',ed)
 
 def une():
-    e=E[4]
+    e=E[5]
     reps="".join(f'<div><strong>{a}</strong><span>{d}</span></div>' for a,_,_,d in e['reps'])
-    prev="".join(f'''<a class="pcard" href="#{E[k]['slug']}">{(img(E[k]['photo'],E[k]['photo_alt'],'thumb') if (not PUBLIC or E[k]['photo'] in CONFIRMED) else f'<span class="thumb thumb-n" aria-hidden="true">N°{k}</span>')}<span class="kick">N°{k} · {E[k]['week'].replace('Semaine du ','')}</span><strong>{E[k]['title']}</strong></a>''' for k in (3,2,1))
+    prev="".join(f'''<a class="pcard" href="#{E[k]['slug']}">{(img(E[k]['photo'],E[k]['photo_alt'],'thumb') if (not PUBLIC or E[k]['photo'] in CONFIRMED) else f'<span class="thumb thumb-n" aria-hidden="true">N°{k}</span>')}<span class="kick">N°{k} · {E[k]['week'].replace('Semaine du ','')}</span><strong>{E[k]['title']}</strong></a>''' for k in (4,3,2))
     bases=[("Risque","Plus un placement peut rapporter, plus il peut baisser.","#glossaire","Risque"),("Diversification","Pas tous vos œufs dans des paniers qui se ressemblent.","#glossaire","Diversification"),("Frais","Un petit pourcentage qui pèse lourd sur la durée.","#glossaire","Frais courants"),("Intérêts composés","Avec le calculateur, pour le voir de vos yeux.","/interets-composes","")]
     bh="".join(f'<a class="bcard" href="{h}"{f" data-term=\"{t}\"" if t else ""}><strong>{a}</strong><span>{b}</span></a>' for a,b,h,t in bases)
     return f'''<div class="page" id="p-une" hidden>
 <div class="une">
-<article class="lead"><span class="kick">Marchés · L'édition de la semaine · N°4</span><h1><a class="lead-link" href="#n4">{e['title']}</a></h1><p class="chapo">{e['chapo']}</p>
-<figure class="chart mini"><div class="chart-h"><strong>{e['chart'][1]}</strong><span>{e['chart'][2]}</span></div>{CH['dumbbell']}</figure>
-<div class="lead-reps">{reps}</div><a class="lead-cta" href="#n4"><span class="lc-l"><b>Lire l'édition N°4 en entier</b><em>Le cap, les repères, les vents dominants, votre épargne et le mot de la semaine</em></span><span class="lc-r">4 min <span class="arr" aria-hidden="true">→</span></span></a></article>
+<article class="lead"><span class="kick">Marchés · L'édition de la semaine · N°5</span><h1><a class="lead-link" href="#n5">{e['title']}</a></h1><p class="chapo">{e['chapo']}</p>
+<figure class="chart mini"><div class="chart-h"><strong>{e['chart'][1]}</strong><span>{e['chart'][2]}</span></div>{CH[e['chart'][0]]}</figure>
+<div class="lead-reps">{reps}</div><a class="lead-cta" href="#n5"><span class="lc-l"><b>Lire l'édition N°5 en entier</b><em>Le cap, les repères, les vents dominants, votre épargne et le mot de la semaine</em></span><span class="lc-r">4 min <span class="arr" aria-hidden="true">→</span></span></a></article>
 <aside class="side"><section class="side-mot"><span class="kick">Le mot de la semaine</span><strong>{e['mot'][0]}</strong><p>{e['mot'][2].split('. ')[0]}.</p><a href="#mots" data-mot="{e['mot'][0]}">Tous les mots de la semaine →</a></section>
 <section class="news"><strong>Recevez l'édition chaque lundi</strong><span>Un e-mail, quatre minutes, sans jargon.</span><label for="nl" class="sr">Votre e-mail</label><input id="nl" type="email" placeholder="Votre e-mail" disabled><button type="button" disabled>Bientôt disponible</button></section></aside>
 </div>
@@ -76,11 +76,11 @@ def une():
 </div>'''
 
 def marches():
-    e=E[4]
-    rows="".join(f'<a class="row" href="#{E[k]["slug"]}"><span class="d">{E[k]["week"].replace("Semaine du ","")}</span><span class="nn">N°{k}</span><strong>{E[k]["title"]}</strong><span class="t">{E[k]["theme"]}</span></a>' for k in (3,2,1))
+    e=E[5]
+    rows="".join(f'<a class="row" href="#{E[k]["slug"]}"><span class="d">{E[k]["week"].replace("Semaine du ","")}</span><span class="nn">N°{k}</span><strong>{E[k]["title"]}</strong><span class="t">{E[k]["theme"]}</span></a>' for k in (4,3,2,1))
     return f'''<div class="page" id="p-marches" hidden>
 <header class="rub-h"><h1>Marchés</h1><p>Chaque lundi, les mouvements de la semaine précédente expliqués : pas seulement de combien ça a bougé, mais pourquoi, et ce que ça change pour votre épargne.</p></header>
-<a class="latest" href="#n4"><div><span class="kick">Dernière édition · N°4 · {e['week'].replace('Semaine du ','')}</span><strong>{e['title']}</strong><span class="chapo">{e['chapo']}</span><span class="more">Lire →</span></div>{img(e["photo"],e["photo_alt"],"latest-img") if (e["photo"] and (not PUBLIC or e["photo"] in CONFIRMED)) else '<span class="latest-n" aria-hidden="true">N°4</span>'}</a>
+<a class="latest" href="#n5"><div><span class="kick">Dernière édition · N°5 · {e['week'].replace('Semaine du ','')}</span><strong>{e['title']}</strong><span class="chapo">{e['chapo']}</span><span class="more">Lire →</span></div>{img(e["photo"],e["photo_alt"],"latest-img") if (e["photo"] and (not PUBLIC or e["photo"] in CONFIRMED)) else '<span class="latest-n" aria-hidden="true">N°5</span>'}</a>
 <section class="block"><h2 class="lab-h">Les éditions précédentes</h2>{rows}</section></div>'''
 
 sys.path.insert(0,str(HERE))
@@ -98,7 +98,7 @@ def glossaire():
 
 def mots():
     cards=""
-    for k in (4,3,2,1):
+    for k in (5,4,3,2,1):
         e=E[k]; w,n,d=e['mot']
         cards+=f"""<article class="mword" data-t="{w}"><div class="mw-meta"><span class="big">N°{k}</span><span>{e['week'].replace('Semaine du ','')}</span></div>
 <div class="mw-body"><div class="mot-h"><strong>{w}</strong><em>{n}</em></div><p>{d}</p><a href="#{e['slug']}">Lire l'édition N°{k} où il a été employé →</a></div></article>"""
@@ -107,7 +107,7 @@ def mots():
 <div class="mwords">{cards}</div></div>"""
 
 CSS=open(HERE/'style.css').read()
-IMGMAP=('{'+",".join(f'"{k}":"/magazine/img/{k}.jpg"' for k in sorted(CONFIRMED))+'}') if PUBLIC else ('{'+",".join(f'"{k}":"data:image/jpeg;base64,{b64(v)}"' for k,v in IMG.items())+'}')
+IMGMAP=('{'+",".join(f'"{k}":"/magazine/img/{k}.jpg"' for k in sorted(CONFIRMED))+'}') if PUBLIC else ('{'+",".join(f'"{k}":"data:image/jpeg;base64,{b64(v)}"' for k,v in IMG.items() if os.path.exists(v))+'}')
 JS=open(HERE/'app.js').read().replace('__IMGS__',IMGMAP)
 H='' if PUBLIC else 'https://kompa-invest.fr'
 LOGOSRC='/kompa-logo.png' if PUBLIC else 'data:image/png;base64,'+LOGO
@@ -127,13 +127,13 @@ html=f'''<!doctype html>
 <header class="site"><a class="logo" href="{H}/"><img src="{LOGOSRC}" alt="Kompa"></a>
 <nav class="site-nav" aria-label="Kompa"><a href="{H}/#decodeur-tool">Décodeur</a><a href="{H}/#second-opinion-tool">Second Opinion</a><a href="{H}/#xray-tool">Mes investissements</a><a href="#une" class="on">Le Magazine</a></nav>
 <a class="btn" href="{H}/portfolio">Mon portefeuille</a></header>
-<div class="mast"><div class="mast-line"><span>Lundi 28 septembre 2026</span><span>N°4</span></div>
+<div class="mast"><div class="mast-line"><span>Lundi 5 octobre 2026</span><span>N°5</span></div>
 <a class="mast-logo" href="#une"><img src="{LOGOSRC}" alt="Kompa"><span>Le Magazine</span></a>
 <nav class="tabs" aria-label="Rubriques du Magazine"><a href="#une" data-tab="une">À la une</a><a href="#marches" data-tab="marches">Marchés</a><a href="#mots" data-tab="mots">Le mot de la semaine</a><a href="#glossaire" data-tab="glossaire">Glossaire</a></nav></div>
 <main>
 {une()}
 {marches()}
-{"".join(edition(E[k]) for k in (4,3,2,1))}
+{"".join(edition(E[k]) for k in (5,4,3,2,1))}
 {mots()}
 {glossaire()}
 </main>
