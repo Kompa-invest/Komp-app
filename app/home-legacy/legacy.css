@@ -241,3 +241,24 @@
   @media (min-width:960px){.lex-grid{grid-template-columns:repeat(2,1fr)}}
   .lex-more{margin:40px 0 0;padding-top:18px;border-top:1px solid var(--border);font-size:14px;color:var(--muted);max-width:900px}
   .lex-more a{color:var(--accent);font-weight:600}
+
+  /* Clarity Test : bloc proposé sous chaque fiche du Décodeur */
+  .ct-fiche{margin-top:22px;border-radius:22px;padding:30px;background:#4F3C69;color:#F8F3EA;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr;gap:22px}
+  @media (min-width:860px){.ct-fiche{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:center}}
+  @media (max-width:520px){.ct-fiche{padding:24px 18px}}
+  .ct-fiche-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#E3D8EE}
+  .ct-fiche h3{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.6vw,36px);line-height:1.08;margin:10px 0;letter-spacing:-.02em}
+  .ct-fiche h3 em{color:#E3D8EE}
+  .ct-fiche p{margin:0;opacity:.85;font-size:15px;line-height:1.55}
+  .ct-fiche-acts{display:flex;flex-direction:column;gap:10px;align-items:stretch;position:relative}
+  .ct-fiche .ct-fiche-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:100px;padding:14px 24px;background:#F8F3EA;color:#1B1913;font-weight:500;font-size:15px;text-decoration:none;transition:opacity .15s}
+  .ct-fiche .ct-fiche-btn:hover{opacity:.9}
+  .ct-fiche .ct-fiche-btn:focus-visible{outline:2px solid #E3D8EE;outline-offset:3px}
+  .ct-fiche-sub{font-size:13px;opacity:.85;text-align:center;line-height:1.5}
+  .ct-fiche-sub a{color:#F8F3EA;text-decoration:underline}
+  .ct-fiche-txt{position:relative}
+  .ct-fiche-ring{position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;border:1px solid rgba(255,255,255,.14);pointer-events:none}
+  .ct-fiche-ring2{position:absolute;right:-20px;top:-20px;width:140px;height:140px;border-radius:50%;border:1px solid rgba(255,255,255,.1);pointer-events:none}
+
+  /* Menu : un lien de plus (Clarity Test), on resserre un peu l'espacement sur les écrans moyens */
+  @media (min-width:820px) and (max-width:1279px){.navlinks{gap:24px;}}

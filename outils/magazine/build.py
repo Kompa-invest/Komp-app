@@ -125,7 +125,7 @@ html=f'''<!doctype html>
 </head>
 <body>
 <header class="site"><a class="logo" href="{H}/"><img src="{LOGOSRC}" alt="Kompa"></a>
-<nav class="site-nav" aria-label="Kompa"><a href="{H}/#decodeur-tool">Décodeur</a><a href="{H}/#second-opinion-tool">Second Opinion</a><a href="{H}/#xray-tool">Mes investissements</a><a href="#une" class="on">Le Magazine</a></nav>
+<nav class="site-nav" aria-label="Kompa"><a href="{H}/#decodeur-tool">Décodeur</a><a href="{H}/#second-opinion-tool">Second Opinion</a><a href="{H}/#xray-tool">Mes investissements</a><a href="#une" class="on">Le Magazine</a><a href="{H}/clarity-test">Clarity Test</a></nav>
 <a class="btn" href="{H}/portfolio">Mon portefeuille</a></header>
 <div class="mast"><div class="mast-line"><span>Lundi 5 octobre 2026</span><span>N°5</span></div>
 <a class="mast-logo" href="#une"><img src="{LOGOSRC}" alt="Kompa"><span>Le Magazine</span></a>

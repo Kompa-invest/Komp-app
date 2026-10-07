@@ -569,7 +569,27 @@
           '<div class="result-block"><h4>Mon argent est-il disponible facilement ?</h4><p>' + f.liquidite + '</p></div>' +
         '</div>' +
         '<div class="not-this"><b>Ce que ce produit n\'est pas :</b> ' + f.notThis + '</div>' +
-      '</div>';
+      '</div>' + renderClarityEntry(f);
+  }
+
+  // Clarity Test : bloc proposé sous chaque fiche dont le test existe.
+  // La liste des tests disponibles est fournie par app/page.tsx (window.__KOMPA_CT__).
+  function renderClarityEntry(f){
+    var ready = window.__KOMPA_CT__;
+    if(!ready || ready.indexOf(f.id) === -1) return '';
+    return '' +
+      '<section class="ct-fiche" aria-label="Clarity Test">' +
+        '<div class="ct-fiche-ring"></div><div class="ct-fiche-ring2"></div>' +
+        '<div class="ct-fiche-txt">' +
+          '<div class="ct-fiche-kicker">Clarity Test</div>' +
+          '<h3>Vous venez de lire la fiche.<br><em>Que vous en reste-t-il\u00a0?</em></h3>' +
+          '<p>7 questions sur ce produit, aucune de culture générale. Environ 3 minutes. À chaque réponse, vous dites aussi à quel point vous êtes sûr de vous.</p>' +
+        '</div>' +
+        '<div class="ct-fiche-acts">' +
+          '<a class="ct-fiche-btn" href="/clarity-test/' + encodeURIComponent(f.id) + '?depuis=fiche">Vérifier ce que j\'ai retenu <span aria-hidden="true">→</span></a>' +
+          '<div class="ct-fiche-sub">Avec un compte Kompa, votre résultat rejoint votre carte de clarté. <a href="/clarity-test">Tous les tests</a></div>' +
+        '</div>' +
+      '</section>';
   }
 
   function renderEmpty(query){
@@ -811,6 +831,18 @@
     if(h === '#decodeur-tool') openScreen();
     else if(h === '#second-opinion-tool') openSecondOpinion();
     else if(h === '#xray-tool') openXray();
+    else if(h.indexOf('#fiche-') === 0) openFicheById(decodeURIComponent(h.slice(7)));
+  }
+  // Ouvre directement la fiche d'un produit, avec un lien du type /#fiche-world
+  // (par exemple depuis le Clarity Test).
+  function openFicheById(id){
+    var f = null;
+    FUNDS.forEach(function(x){ if(x.id === id) f = x; });
+    if(!f) { openScreen(); return; }
+    openScreen();
+    productScreenBody.innerHTML = renderFund(f);
+    productScreen.classList.add('open');
+    productScreen.scrollTop = 0;
   }
   openFromHash();
   window.addEventListener('hashchange', openFromHash);
