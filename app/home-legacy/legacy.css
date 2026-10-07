@@ -262,3 +262,21 @@
 
   /* Menu : un lien de plus (Clarity Test), on resserre un peu l'espacement sur les écrans moyens */
   @media (min-width:820px) and (max-width:1279px){.navlinks{gap:24px;}}
+
+  /* Accueil : trois chiffres tournants + l'engagement Second Opinion, fixe, en violet */
+  @media (min-width:820px){.stats-facts{grid-template-columns:repeat(2,1fr);}}
+  @media (min-width:1100px){.stats-facts{grid-template-columns:repeat(4,1fr);}}
+  .stats-facts .stat{display:flex;flex-direction:column;gap:8px;padding:24px 24px 20px;}
+  .stats-facts .stat .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--accent);}
+  .stats-facts .stat b{font-size:34px;line-height:1.05;}
+  .stats-facts .stat .t{font-size:14px;color:var(--muted);line-height:1.5;}
+  .stats-facts .stat .s{margin-top:auto;font-size:11.5px;color:var(--muted);opacity:.85;line-height:1.4;}
+  .stats-facts .stat a,.stats-facts .stat .go{font-size:13px;font-weight:600;color:var(--accent);}
+  .stats-facts .stat a:hover{text-decoration:underline;}
+  .stats-facts .stat-fact{animation:kfIn .45s ease both;}
+  @keyframes kfIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .stats-facts .stat-kompa{background:#4F3C69;color:#F8F3EA;}
+  .stats-facts .stat-kompa .k,.stats-facts .stat-kompa .t,.stats-facts .stat-kompa .s{color:#E3D8EE;}
+  .stats-facts .stat-kompa .go{color:#F8F3EA;}
+  .stats-facts .stat-kompa:hover .go{text-decoration:underline;}
+  @media (prefers-reduced-motion:reduce){.stats-facts .stat-fact{animation:none;}}

@@ -191,6 +191,13 @@ details.plus[open] .ic{transform:rotate(45deg)}
 .mw-body a{font-size:14px;font-weight:600}
 .mword.flash{background:linear-gradient(90deg,var(--vl),transparent)}
 @media (max-width:860px){.mword{grid-template-columns:1fr;gap:12px}}
+
+/* La une : carte de la dernière édition (photo à droite), dans la colonne principale */
+.latest-une{margin-top:0}
+.latest-une>div:first-child{padding:30px}
+.latest-une strong{font-size:clamp(26px,2.6vw,32px)}
+.latest-une .latest-img,.latest-une .latest-n{min-height:240px}
+#toutes{scroll-margin-top:24px}
 </style>
 </head>
 <body>
@@ -199,58 +206,20 @@ details.plus[open] .ic{transform:rotate(45deg)}
 <a class="btn" href="/portfolio">Mon portefeuille</a></header>
 <div class="mast"><div class="mast-line"><span>Lundi 5 octobre 2026</span><span>N°5</span></div>
 <a class="mast-logo" href="#une"><img src="/kompa-logo.png" alt="Kompa"><span>Le Magazine</span></a>
-<nav class="tabs" aria-label="Rubriques du Magazine"><a href="#une" data-tab="une">À la une</a><a href="#marches" data-tab="marches">Marchés</a><a href="#mots" data-tab="mots">Le mot de la semaine</a><a href="#glossaire" data-tab="glossaire">Glossaire</a></nav></div>
+<nav class="tabs" aria-label="Rubriques du Magazine"><a href="#une" data-tab="une">À la une</a><a href="#mots" data-tab="mots">Le mot de la semaine</a><a href="#glossaire" data-tab="glossaire">Glossaire</a></nav></div>
 <main>
 <div class="page" id="p-une" hidden>
 <div class="une">
-<article class="lead"><span class="kick">Marchés · L'édition de la semaine · N°5</span><h1><a class="lead-link" href="#n5">Le budget ne rassure pas, la France emprunte au plus cher depuis 2002.</a></h1><p class="chapo">Présenté jeudi, le projet de budget 2027 n'a pas apaisé les investisseurs. Dans la zone euro, les prix montent à un rythme inédit depuis trois ans.</p>
-<figure class="chart mini"><div class="chart-h"><strong>Les taux français et allemands s'éloignent</strong><span>Taux d'emprunt à 10 ans de la France et de l'Allemagne, à la clôture, du 25 septembre au 2 octobre 2026</span></div><svg viewBox="0 0 896 300" width="100%" role="img" aria-label="Du 25 septembre au 2 octobre 2026, le taux à 10 ans de la France passe de 4,73 % à 4,86 % (4,92 % le 1er octobre), celui de l'Allemagne de 3,62 % à 3,45 %. L'écart passe de 1,11 à 1,40 point.">
-<line x1="64" y1="217.0" x2="760" y2="217.0" stroke="#D6CCB6" stroke-dasharray="2 5"></line>
-<text x="52" y="221.0" text-anchor="end" font-size="12" fill="#8A8370" font-family="IBM Plex Sans, sans-serif">3,5 %</text>
-<line x1="64" y1="162.0" x2="760" y2="162.0" stroke="#D6CCB6" stroke-dasharray="2 5"></line>
-<text x="52" y="166.0" text-anchor="end" font-size="12" fill="#8A8370" font-family="IBM Plex Sans, sans-serif">4 %</text>
-<line x1="64" y1="107.0" x2="760" y2="107.0" stroke="#D6CCB6" stroke-dasharray="2 5"></line>
-<text x="52" y="111.0" text-anchor="end" font-size="12" fill="#8A8370" font-family="IBM Plex Sans, sans-serif">4,5 %</text>
-<line x1="64" y1="52.0" x2="760" y2="52.0" stroke="#D6CCB6" stroke-dasharray="2 5"></line>
-<text x="52" y="56.0" text-anchor="end" font-size="12" fill="#8A8370" font-family="IBM Plex Sans, sans-serif">5 %</text>
-<line x1="64" y1="250" x2="760" y2="250" stroke="#B7B09B"></line>
-<text x="64.0" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">ven. 25/09</text>
-<text x="203.2" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">lun. 28/09</text>
-<text x="342.4" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">mar. 29/09</text>
-<text x="481.6" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">mer. 30/09</text>
-<text x="620.8" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">jeu. 1er/10</text>
-<text x="760.0" y="274" text-anchor="middle" font-size="12" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">ven. 2/10</text>
-<path d="M64.0,81.7 L203.2,76.2 L342.4,72.9 L481.6,67.4 L620.8,60.8 L760.0,67.4 L760.0,222.5 L620.8,214.8 L481.6,208.2 L342.4,204.9 L203.2,201.6 L64.0,203.8 Z" fill="#8E72A8" fill-opacity="0.10"></path>
-<path d="M64.0,203.8 L203.2,201.6 L342.4,204.9 L481.6,208.2 L620.8,214.8 L760.0,222.5" fill="none" stroke="#8E72A8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M64.0,81.7 L203.2,76.2 L342.4,72.9 L481.6,67.4 L620.8,60.8 L760.0,67.4" fill="none" stroke="#4F3C69" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"></path>
-<circle cx="64.0" cy="81.7" r="4" fill="#4F3C69"></circle><circle cx="64.0" cy="203.8" r="3.5" fill="#8E72A8"></circle>
-<circle cx="203.2" cy="76.2" r="4" fill="#4F3C69"></circle><circle cx="203.2" cy="201.6" r="3.5" fill="#8E72A8"></circle>
-<circle cx="342.4" cy="72.9" r="4" fill="#4F3C69"></circle><circle cx="342.4" cy="204.9" r="3.5" fill="#8E72A8"></circle>
-<circle cx="481.6" cy="67.4" r="4" fill="#4F3C69"></circle><circle cx="481.6" cy="208.2" r="3.5" fill="#8E72A8"></circle>
-<circle cx="620.8" cy="60.8" r="4" fill="#4F3C69"></circle><circle cx="620.8" cy="214.8" r="3.5" fill="#8E72A8"></circle>
-<circle cx="760.0" cy="67.4" r="4" fill="#4F3C69"></circle><circle cx="760.0" cy="222.5" r="3.5" fill="#8E72A8"></circle>
-<text x="64.0" y="67.7" font-size="13" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">4,73 %</text>
-<text x="64.0" y="227.8" font-size="13" fill="#3E3A31" font-family="IBM Plex Sans, sans-serif">3,62 %</text>
-<text x="620.8" y="46.8" text-anchor="middle" font-size="13" font-weight="600" fill="#4F3C69" font-family="IBM Plex Sans, sans-serif">4,92 %</text>
-<text x="774.0" y="72.4" font-size="14" font-weight="600" fill="#4F3C69" font-family="IBM Plex Sans, sans-serif">France 4,86 %</text>
-<text x="774.0" y="227.5" font-size="14" font-weight="600" fill="#6E5690" font-family="IBM Plex Sans, sans-serif">Allemagne 3,45 %</text>
-<line x1="766.0" y1="79.4" x2="766.0" y2="210.5" stroke="#4F3C69" stroke-width="1.5" stroke-dasharray="3 3"></line>
-<rect x="774.0" y="122.9" width="118" height="44" rx="10" fill="#4F3C69"></rect>
-<text x="786.0" y="140.9" font-size="12" fill="#E7DDF0" font-family="IBM Plex Sans, sans-serif">Écart au 2 oct.</text>
-<text x="786.0" y="158.9" font-size="15" font-weight="600" fill="#FFFFFF" font-family="IBM Plex Sans, sans-serif">1,40 point</text>
-<text x="134.0" y="147.8" font-size="12" fill="#6E5690" font-family="IBM Plex Sans, sans-serif">écart 1,11 point</text>
-</svg></figure>
+<article class="lead">
+<a class="latest latest-une" href="#n5"><div><span class="kick">L'édition de la semaine · N°5 · 28 septembre au 2 octobre 2026</span><strong>Le budget ne rassure pas, la France emprunte au plus cher depuis 2002.</strong><span class="chapo">Présenté jeudi, le projet de budget 2027 n'a pas apaisé les investisseurs. Dans la zone euro, les prix montent à un rythme inédit depuis trois ans.</span><span class="more">Lire →</span></div><img data-img="bercy" alt="Le ministère de l'Économie et des Finances, à Bercy, au bord de la Seine au crépuscule" class="latest-img"></a>
 <div class="lead-reps"><div><strong>Taux de la France à 10 ans, jeudi 1er octobre</strong><span>Indice officiel de la Banque de France (TEC 10) : 4,90 % les 1er et 2 octobre.</span></div><div><strong>Inflation, zone euro, septembre</strong><span>Contre 3,2 % en août. Les prix de l'énergie augmentent de 18,8 % sur un an.</span></div><div><strong>CAC 40, semaine du 28 septembre au 2 octobre</strong><span>Jeudi, l'indice a perdu 1,62 % en une séance.</span></div></div><a class="lead-cta" href="#n5"><span class="lc-l"><b>Lire l'édition N°5 en entier</b><em>Le cap, les repères, les vents dominants, votre épargne et le mot de la semaine</em></span><span class="lc-r">4 min <span class="arr" aria-hidden="true">→</span></span></a></article>
 <aside class="side"><section class="side-mot"><span class="kick">Le mot de la semaine</span><strong>La valeur refuge</strong><p>Une valeur refuge est un placement vers lequel les investisseurs se tournent quand l'inquiétude monte, parce qu'il est jugé plus sûr : l'or, certaines monnaies ou la dette de l'Allemagne, par exemple.</p><a href="#mots" data-mot="La valeur refuge">Tous les mots de la semaine →</a></section>
 <section class="news"><strong>Recevez l'édition chaque lundi</strong><span>Un e-mail, quatre minutes, sans jargon.</span><label for="nl" class="sr">Votre e-mail</label><input id="nl" type="email" placeholder="Votre e-mail" disabled><button type="button" disabled>Bientôt disponible</button></section></aside>
 </div>
-<section class="block"><div class="block-h"><h2>Les éditions précédentes</h2><a href="#marches">Toutes les éditions →</a></div><div class="pgrid"><a class="pcard" href="#n4"><img data-img="raffinerie" alt="Une raffinerie de pétrole illuminée au crépuscule" class="thumb"><span class="kick">N°4 · 21 au 25 septembre 2026</span><strong>Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</strong></a><a class="pcard" href="#n3"><img data-img="bourse" alt="Fronton du palais Brongniart, où l'on lit « Bourse »" class="thumb"><span class="kick">N°3 · 14 au 18 septembre 2026</span><strong>La Fed relève à son tour ses taux, la dette française sous pression.</strong></a><a class="pcard" href="#n2"><img data-img="eurosign" alt="Le symbole de l'euro illuminé, la nuit, à Francfort" class="thumb"><span class="kick">N°2 · 7 au 11 septembre 2026</span><strong>La BCE relève ses taux, le pétrole repasse les 100 dollars.</strong></a></div></section>
+<section class="block"><div class="block-h"><h2>Les éditions précédentes</h2><a href="#toutes">Toutes les éditions →</a></div><div class="pgrid"><a class="pcard" href="#n4"><img data-img="raffinerie" alt="Une raffinerie de pétrole illuminée au crépuscule" class="thumb"><span class="kick">N°4 · 21 au 25 septembre 2026</span><strong>Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</strong></a><a class="pcard" href="#n3"><img data-img="bourse" alt="Fronton du palais Brongniart, où l'on lit « Bourse »" class="thumb"><span class="kick">N°3 · 14 au 18 septembre 2026</span><strong>La Fed relève à son tour ses taux, la dette française sous pression.</strong></a><a class="pcard" href="#n2"><img data-img="eurosign" alt="Le symbole de l'euro illuminé, la nuit, à Francfort" class="thumb"><span class="kick">N°2 · 7 au 11 septembre 2026</span><strong>La BCE relève ses taux, le pétrole repasse les 100 dollars.</strong></a></div></section>
 <section class="block"><div class="block-h"><h2>Les bases, à lire avant de commencer</h2><a href="#glossaire">Tout le glossaire →</a></div><div class="bgrid"><a class="bcard" href="#glossaire" data-term="Risque"><strong>Risque</strong><span>Plus un placement peut rapporter, plus il peut baisser.</span></a><a class="bcard" href="#glossaire" data-term="Diversification"><strong>Diversification</strong><span>Pas tous vos œufs dans des paniers qui se ressemblent.</span></a><a class="bcard" href="#glossaire" data-term="Frais courants"><strong>Frais</strong><span>Un petit pourcentage qui pèse lourd sur la durée.</span></a><a class="bcard" href="/interets-composes"><strong>Intérêts composés</strong><span>Avec le calculateur, pour le voir de vos yeux.</span></a></div></section>
+<section class="block" id="toutes"><div class="block-h"><h2>Toutes les éditions</h2></div><a class="row" href="#n5"><span class="d">28 septembre au 2 octobre 2026</span><span class="nn">N°5</span><strong>Le budget ne rassure pas, la France emprunte au plus cher depuis 2002.</strong><span class="t">Budget, taux, inflation</span></a><a class="row" href="#n4"><span class="d">21 au 25 septembre 2026</span><span class="nn">N°4</span><strong>Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</strong><span class="t">Pétrole, activité, Bourse</span></a><a class="row" href="#n3"><span class="d">14 au 18 septembre 2026</span><span class="nn">N°3</span><strong>La Fed relève à son tour ses taux, la dette française sous pression.</strong><span class="t">Taux, banques centrales</span></a><a class="row" href="#n2"><span class="d">7 au 11 septembre 2026</span><span class="nn">N°2</span><strong>La BCE relève ses taux, le pétrole repasse les 100 dollars.</strong><span class="t">Banques centrales, pétrole</span></a><a class="row" href="#n1"><span class="d">1er au 4 septembre 2026</span><span class="nn">N°1</span><strong>L'inflation remonte en Europe, l'emploi américain surprend.</strong><span class="t">Inflation, emploi</span></a></section>
 </div>
-<div class="page" id="p-marches" hidden>
-<header class="rub-h"><h1>Marchés</h1><p>Chaque lundi, les mouvements de la semaine précédente expliqués : pas seulement de combien ça a bougé, mais pourquoi, et ce que ça change pour votre épargne.</p></header>
-<a class="latest" href="#n5"><div><span class="kick">Dernière édition · N°5 · 28 septembre au 2 octobre 2026</span><strong>Le budget ne rassure pas, la France emprunte au plus cher depuis 2002.</strong><span class="chapo">Présenté jeudi, le projet de budget 2027 n'a pas apaisé les investisseurs. Dans la zone euro, les prix montent à un rythme inédit depuis trois ans.</span><span class="more">Lire →</span></div><img data-img="bercy" alt="Le ministère de l'Économie et des Finances, à Bercy, au bord de la Seine au crépuscule" class="latest-img"></a>
-<section class="block"><h2 class="lab-h">Les éditions précédentes</h2><a class="row" href="#n4"><span class="d">21 au 25 septembre 2026</span><span class="nn">N°4</span><strong>Le pétrole suit la diplomatie, la Bourse de Paris reprend son souffle.</strong><span class="t">Pétrole, activité, Bourse</span></a><a class="row" href="#n3"><span class="d">14 au 18 septembre 2026</span><span class="nn">N°3</span><strong>La Fed relève à son tour ses taux, la dette française sous pression.</strong><span class="t">Taux, banques centrales</span></a><a class="row" href="#n2"><span class="d">7 au 11 septembre 2026</span><span class="nn">N°2</span><strong>La BCE relève ses taux, le pétrole repasse les 100 dollars.</strong><span class="t">Banques centrales, pétrole</span></a><a class="row" href="#n1"><span class="d">1er au 4 septembre 2026</span><span class="nn">N°1</span><strong>L'inflation remonte en Europe, l'emploi américain surprend.</strong><span class="t">Inflation, emploi</span></a></section></div>
 <div class="page" id="p-n5" hidden>
 <article class="edition">
 <header class="ed-head"><div class="rail"><span class="rail-lab muted">Édition</span><span class="big-n">N°5</span></div>
@@ -488,13 +457,15 @@ details.plus[open] .ic{transform:rotate(45deg)}
 <script>(function(){
   var IMGS={"bercy":"/magazine/img/bercy.jpg","bourse":"/magazine/img/bourse.jpg","europiece":"/magazine/img/europiece.jpg","eurosign":"/magazine/img/eurosign.jpg","raffinerie":"/magazine/img/raffinerie.jpg","warsh":"/magazine/img/warsh.jpg"};
   document.querySelectorAll('img[data-img]').forEach(function(im){var k=im.getAttribute('data-img');if(IMGS[k])im.src=IMGS[k];});
-  var pages=['une','marches','n1','n2','n3','n4','n5','mots','glossaire'];
+  var pages=['une','n1','n2','n3','n4','n5','mots','glossaire'];
   var pendingTerm=null, pendingJump=null;
   function show(){
-    var h=(location.hash||'#une').slice(1); if(pages.indexOf(h)<0) h='une';
+    // #marches (ancienne rubrique) mène à la une ; #toutes, à la liste des éditions en bas de la une.
+    var h=(location.hash||'#une').slice(1); if(h==='marches') h='une'; var anchor=null; if(pages.indexOf(h)<0){ if(h==='toutes') anchor='toutes'; h='une'; }
     pages.forEach(function(p){var el=document.getElementById('p-'+p); if(el) el.hidden=(p!==h);});
-    var tab = /^n\d$/.test(h)?'marches':h;
+    var tab = /^n\d+$/.test(h)?'une':h;
     document.querySelectorAll('.tabs a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-tab')===tab);});
+    if(anchor){var t0=document.getElementById(anchor); if(t0){t0.scrollIntoView(); return;}}
     if(pendingJump){var j=document.getElementById(pendingJump); pendingJump=null; if(j){j.scrollIntoView(); return;}}
     if((h==='glossaire'||h==='mots') && pendingTerm){var t=document.querySelector('#p-'+h+' [data-t="'+pendingTerm+'"]'); pendingTerm=null; if(t){t.scrollIntoView({block:'center'}); t.classList.add('flash'); setTimeout(function(){t.classList.remove('flash');},1600); return;}}
     window.scrollTo(0,0);

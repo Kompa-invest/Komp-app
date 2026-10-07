@@ -215,8 +215,9 @@ export default function ClarityTest({ bank, names }: { bank: Bank; names: Record
   }
 
   async function share(r: Result) {
-    const url = `${window.location.origin}/clarity-test/${bank.id}`;
-    const text = `${plain(bank.share)} à ${r.clarity} %. Et vous ? Le Clarity Test Kompa :`;
+    // Lien de défi : son aperçu (image avec le score) vient de defi/[score]/opengraph-image.tsx.
+    const url = `${window.location.origin}/clarity-test/${bank.id}/defi/${r.clarity}`;
+    const text = `${plain(bank.share)} à ${r.clarity}\u00a0%. À toi de jouer\u00a0!`;
     if (typeof navigator.share === "function") {
       try {
         await navigator.share({ title: "Clarity Test Kompa", text, url });

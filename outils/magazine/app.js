@@ -1,13 +1,15 @@
 (function(){
   var IMGS=__IMGS__;
   document.querySelectorAll('img[data-img]').forEach(function(im){var k=im.getAttribute('data-img');if(IMGS[k])im.src=IMGS[k];});
-  var pages=['une','marches','n1','n2','n3','n4','n5','mots','glossaire'];
+  var pages=['une','n1','n2','n3','n4','n5','mots','glossaire'];
   var pendingTerm=null, pendingJump=null;
   function show(){
-    var h=(location.hash||'#une').slice(1); if(pages.indexOf(h)<0) h='une';
+    // #marches (ancienne rubrique) mène à la une ; #toutes, à la liste des éditions en bas de la une.
+    var h=(location.hash||'#une').slice(1); if(h==='marches') h='une'; var anchor=null; if(pages.indexOf(h)<0){ if(h==='toutes') anchor='toutes'; h='une'; }
     pages.forEach(function(p){var el=document.getElementById('p-'+p); if(el) el.hidden=(p!==h);});
-    var tab = /^n\d$/.test(h)?'marches':h;
+    var tab = /^n\d+$/.test(h)?'une':h;
     document.querySelectorAll('.tabs a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-tab')===tab);});
+    if(anchor){var t0=document.getElementById(anchor); if(t0){t0.scrollIntoView(); return;}}
     if(pendingJump){var j=document.getElementById(pendingJump); pendingJump=null; if(j){j.scrollIntoView(); return;}}
     if((h==='glossaire'||h==='mots') && pendingTerm){var t=document.querySelector('#p-'+h+' [data-t="'+pendingTerm+'"]'); pendingTerm=null; if(t){t.scrollIntoView({block:'center'}); t.classList.add('flash'); setTimeout(function(){t.classList.remove('flash');},1600); return;}}
     window.scrollTo(0,0);

@@ -181,3 +181,10 @@ details.plus[open] .ic{transform:rotate(45deg)}
 .mw-body a{font-size:14px;font-weight:600}
 .mword.flash{background:linear-gradient(90deg,var(--vl),transparent)}
 @media (max-width:860px){.mword{grid-template-columns:1fr;gap:12px}}
+
+/* La une : carte de la dernière édition (photo à droite), dans la colonne principale */
+.latest-une{margin-top:0}
+.latest-une>div:first-child{padding:30px}
+.latest-une strong{font-size:clamp(26px,2.6vw,32px)}
+.latest-une .latest-img,.latest-une .latest-n{min-height:240px}
+#toutes{scroll-margin-top:24px}

@@ -134,7 +134,7 @@ export const autocall: Bank = {
       ask: "Si je dois récupérer mon argent avant l'échéance, à quel prix pourrais-je revendre&nbsp;?" },
   ],
   notes: [
-    "La fiche du Décodeur cite des coupons « de l'ordre de 6 % à 10 % » et une barrière « souvent autour de 60 % » sans source. Le test ne reprend pas ces chiffres ; l'exemple à 60 % y est présenté comme fictif.",
+    "Fiche du Décodeur réécrite le 7 octobre 2026 en langage simple : les chiffres sans source (coupons « 6 % à 10 % », barrière « autour de 60 % ») ont été retirés ; la fiche et le test utilisent le même exemple fictif (barrière à 60 %, baisse de 45 %).",
     "Chaque autocall a son propre DIC : pour un produit précis, le Clarity Test personnel est le bon outil.",
   ],
 };

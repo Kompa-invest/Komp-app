@@ -501,16 +501,16 @@
       match:['autocall','produit structure autocall'],
       ter:null, replication:'n/a',
       geo:[],
-      whatIsIt:"Un produit structuré qui verse un coupon conditionnel et peut être remboursé automatiquement par anticipation si un indice de référence atteint un certain niveau à une date d'observation, généralement chaque année.",
-      gain:"Vous gagnez un coupon (souvent de l'ordre de 6 % à 10 % par an selon les conditions de marché à la souscription) si l'indice de référence est au-dessus du seuil fixé à une date d'observation, ce qui déclenche aussi le remboursement anticipé du capital.",
-      lose:"Vous perdez une partie de votre capital si, à l'échéance finale, l'indice de référence est resté en dessous d'une barrière de protection (souvent fixée autour de 60 % de sa valeur de départ), la perte étant alors proportionnelle à la baisse de l'indice.",
-      risks:["Risque de perte en capital en cas de forte baisse du sous-jacent sous la barrière de protection à l'échéance","Risque de contrepartie : le remboursement dépend de la solidité financière de la banque émettrice","Risque de liquidité : le produit est conçu pour être conservé jusqu'à un rappel ou l'échéance, une sortie anticipée se faisant à un prix de marché potentiellement défavorable"],
-      monte:["L'indice de référence dépasse le seuil fixé à une date d'observation, déclenchant le rappel et le versement des coupons","Les marchés progressent régulièrement sans forte baisse intermédiaire","La volatilité élevée au moment de la souscription a permis de fixer un coupon attractif"],
-      baisse:["L'indice de référence reste durablement sous son niveau de départ, retardant ou empêchant le rappel","Une crise boursière sévère fait chuter l'indice sous la barrière de protection à l'échéance finale","Vous devez revendre le produit avant son terme, à un prix potentiellement inférieur au capital investi"],
-      pros:["Coupon potentiellement attractif par rapport à d'autres placements obligataires, même en l'absence de forte hausse du marché","Barrière de protection qui absorbe une baisse modérée du sous-jacent sans perte en capital à l'échéance"],
-      cons:["Perte en capital possible et parfois importante en cas de crise boursière sévère (des indices ont perdu plus de 50 % de leur valeur lors de certaines crises passées)","Produit complexe dont la date de sortie (le rappel) est décidée par la formule du produit, pas par l'investisseur"],
-      liquidite:"Faible : le produit est conçu pour être conservé jusqu'au rappel automatique ou à l'échéance finale, une revente anticipée se faisant à un prix de marché incertain.",
-      notThis:"Ce n'est pas un placement à capital garanti : contrairement à une idée reçue entretenue par le mot « autocall », une baisse sévère et durable du marché peut faire perdre une partie significative du capital investi."
+      whatIsIt:"Un placement proposé par une banque, qui dure au maximum 8 à 12 ans en général. Son résultat dépend d'un indice boursier, par exemple le CAC 40. À des dates prévues dans le contrat, par exemple chaque année, on regarde où en est l'indice : s'il est au moins au niveau fixé (par exemple son niveau de départ), le placement s'arrête et vous récupérez votre mise plus un gain fixé à l'avance. Sinon, il continue jusqu'à la date suivante.",
+      gain:"Exemple fictif : vous placez 10 000 € avec un gain prévu de 5 % par année écoulée. Au bout d'un an, l'indice est au-dessus de son niveau de départ : le placement s'arrête et vous récupérez 10 500 €. S'il est en dessous, rien n'est versé et on regarde de nouveau l'année suivante. Si l'arrêt a lieu au bout de 3 ans, vous récupérez 11 500 €. Le gain et ses conditions changent d'un produit à l'autre : ils sont écrits dans son document d'informations clés.",
+      lose:"Si le placement arrive à sa dernière date sans s'être arrêté, tout dépend de l'indice ce jour-là. S'il a un peu baissé, vous récupérez en général votre mise, sans gain. S'il est passé sous un seuil fixé dans le contrat (la « barrière »), vous perdez autant que l'indice. Exemple fictif : barrière à 60 % du niveau de départ, l'indice a perdu 45 % : vous perdez 45 % de votre mise, soit 4 500 € sur 10 000 €.",
+      risks:["Perte d'une partie de votre mise si l'indice a beaucoup baissé à la dernière date","La banque qui a créé le produit doit pouvoir payer : si elle fait faillite, vous pouvez perdre votre mise, même si l'indice va bien","Difficile à revendre avant la fin : si vous avez besoin de l'argent, le prix de revente peut être bas"],
+      monte:["L'indice se maintient ou monte aux dates prévues : le placement s'arrête avec son gain","Les marchés restent calmes, sans forte chute"],
+      baisse:["L'indice reste sous son niveau de départ d'une date à l'autre : le placement continue sans rien verser","L'indice chute fortement et finit sous la barrière à la dernière date","Vous devez revendre avant la fin, à un prix qui peut être inférieur à votre mise"],
+      pros:["Un gain connu à l'avance, possible même si la bourse monte très peu","Une baisse modérée de l'indice ne fait pas perdre d'argent à la fin, grâce à la barrière"],
+      cons:["Vous ne profitez pas de la hausse de la bourse au-delà du gain prévu","Vous ne choisissez pas quand le placement s'arrête : c'est la formule du contrat qui décide","Une forte baisse peut faire perdre une grande partie de la mise"],
+      liquidite:"Faible : il est prévu pour être gardé jusqu'à son arrêt automatique ou jusqu'à sa dernière date. Une revente avant se fait à un prix incertain.",
+      notThis:"Ce n'est pas un placement garanti : si la bourse chute fortement et ne remonte pas avant la dernière date, vous pouvez perdre une partie importante de votre mise."
     }
   ];
 
@@ -591,6 +591,25 @@
         '</div>' +
       '</section>';
   }
+
+  // Accueil : trois chiffres tirés au hasard à chaque visite (données : lib/clarity/accueil.ts,
+  // fournies par app/page.tsx). La case violette « 48 h » reste fixe, tout à droite.
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function renderHomeFacts(){
+    var pool = (window.__KOMPA_FACTS__ || []).slice();
+    var slots = document.querySelectorAll('#homeFacts .stat-fact');
+    if(pool.length < slots.length) return;
+    var used = {};
+    slots.forEach(function(el){
+      var f = null;
+      // jamais deux chiffres du même produit sur la page
+      while(pool.length && (!f || used[f.href])) f = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+      if(!f || used[f.href]) return;
+      used[f.href] = true;
+      el.innerHTML = '<span class="k">' + esc(f.tag) + '</span><b>' + esc(f.big) + '</b><span class="t">' + esc(f.text) + '</span><span class="s">Source : ' + esc(f.src) + '</span><a href="' + f.href + '">' + esc(f.link) + ' →</a>';
+    });
+  }
+  renderHomeFacts();
 
   function renderEmpty(query){
     return '<div class="empty-result">Le produit « ' + query + ' » n\'est pas encore dans notre base de test (limitée à 5 produits pour cette version bêta). Essayez « World », « S&amp;P 500 », « Nasdaq », « Emerging » ou « CAC 40 ».</div>';
@@ -719,7 +738,7 @@
     ],
     structures: [
       { name:'Produit à capital garanti', query:'Capital garanti', one:"Votre capital de départ est protégé à échéance, en échange d'un potentiel de gain limité.", risk:'modere' },
-      { name:'Autocall', query:'Autocall', one:"Un rendement conditionnel versé si un indice reste au-dessus d'un seuil fixé, avec un risque de perte en capital sinon.", risk:'eleve' }
+      { name:'Autocall', query:'Autocall', one:"Un gain fixé à l'avance si un indice boursier se tient bien à des dates prévues, et un risque de perte s'il chute fortement.", risk:'eleve' }
     ]
   };
 
