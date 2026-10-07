@@ -683,6 +683,7 @@
     productScreen.scrollTop = 0;
   }
   if(productBack) productBack.addEventListener('click', function(){
+    clearHash();
     productScreen.classList.remove('open');
   });
 
@@ -692,7 +693,7 @@
       document.querySelectorAll('.tab-panel').forEach(function(p){ p.style.display = 'none'; });
       tab.classList.add('active');
       var panel = document.querySelector('.tab-panel[data-tab="' + tab.getAttribute('data-tab') + '"]');
-      if(panel){ panel.style.display = 'block'; }
+      if(panel){ panel.hidden = false; panel.style.display = 'block'; }
     });
   });
   var etfPanel = document.querySelector('.tab-panel[data-tab="etf"]');
@@ -769,7 +770,15 @@
     document.body.style.overflow = 'hidden';
     screen.scrollTop = 0;
   }
+  // Quand on ferme un écran ouvert par une ancre (#xray-tool, #fiche-world…), l'ancre est effacée
+  // de l'adresse : sinon, un rechargement de la page rouvrirait cet écran au lieu de l'accueil.
+  function clearHash(){
+    if(window.location.hash && window.history && history.replaceState){
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
   function closeScreen(){
+    clearHash();
     screen.classList.remove('open');
     document.body.style.overflow = '';
   }
@@ -797,6 +806,7 @@
     if(soConfirmation) soConfirmation.style.display = 'none';
   }
   function closeSecondOpinion(){
+    clearHash();
     if(!soScreen) return;
     soScreen.classList.remove('open');
     document.body.style.overflow = '';
@@ -830,6 +840,7 @@
     xrayScreen.scrollTop = 0;
   }
   function closeXray(){
+    clearHash();
     if(!xrayScreen) return;
     xrayScreen.classList.remove('open');
     document.body.style.overflow = '';
