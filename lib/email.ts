@@ -23,7 +23,8 @@ export async function sendMail(opts: {
   replyTo?: string;
 }) {
   await getTransporter().sendMail({
-    from: `Kompa <${process.env.SMTP_USER}>`,
+    // Nom d'expéditeur affiché aux clients (souhait de Théo : « L'équipe Kompa »).
+    from: `"L'équipe Kompa" <${process.env.SMTP_USER}>`,
     to: opts.to,
     subject: opts.subject,
     text: opts.text,

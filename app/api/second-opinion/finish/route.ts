@@ -9,6 +9,7 @@ import {
   SO_UPLOAD_TIMEOUT_HOURS,
   addBusinessDays,
 } from "@/lib/second-opinion/config";
+import { PRIVE, SO_PRIX_UNITE } from "@/lib/kompa/offres";
 
 export const runtime = "nodejs";
 
@@ -83,22 +84,39 @@ export async function POST(req: Request) {
     row.civility && row.last_name ? `${row.civility} ${row.last_name}` : row.full_name;
   const displayName = row.civility ? `${row.civility} ${row.full_name}` : row.full_name;
   const deadline = frDate(addBusinessDays(now, 2));
+  // Formule : colonne « offer » si elle existe, sinon mention ajoutée au début du message.
+  const offer: "prive" | "unite" =
+    row.offer === "prive" || (!row.offer && String(row.message ?? "").startsWith("[Formule : membre")) ? "prive" : "unite";
+  const formuleTheo =
+    offer === "prive"
+      ? `Formule : membre ${PRIVE} (analyse incluse dans l'abonnement).\n` +
+        `À rendre avant : ${deadline} (48 h ouvrées).`
+      : `Formule : analyse à l'unité, ${SO_PRIX_UNITE} à régler.\n` +
+        `À faire d'abord : envoyer au client la demande de règlement (clique sur "Répondre").\n` +
+        `Délai annoncé au client : 48 h ouvrées après réception du règlement.`;
+  const formuleClient =
+    offer === "prive"
+      ? `Nous avons bien reçu votre document. Cette analyse est incluse dans votre abonnement ${PRIVE} : ` +
+        `vous recevrez une seconde lecture à cette adresse sous 48 heures ouvrées.\n\n`
+      : `Nous avons bien reçu votre document. Votre analyse à l'unité coûte ${SO_PRIX_UNITE} : ` +
+        `nous vous adressons la demande de règlement à cette adresse, et vous recevez votre seconde lecture ` +
+        `sous 48 heures ouvrées après réception du règlement.\n\n`;
   const expires = frDate(new Date(now.getTime() + SO_DOCUMENT_DAYS * 24 * 3600 * 1000));
 
   const results = await Promise.allSettled([
     sendMail({
       to: notifyTo,
       replyTo: row.email,
-      subject: `Second Opinion : ${displayName}`,
+      subject: `Second Opinion${offer === "prive" ? ` (${PRIVE})` : ` (à l'unité, ${SO_PRIX_UNITE})`} : ${displayName}`,
       text:
         `Nouvelle demande de Second Opinion.\n\n` +
         `Nom : ${displayName}\n` +
         `E-mail : ${row.email}\n` +
         `Téléphone : ${row.phone}\n` +
         `Fichier : ${row.file_name ?? "document"}\n\n` +
+        `${formuleTheo}\n\n` +
         `Ce que la personne veut regarder en priorité :\n${row.message ?? "Non précisé."}\n\n` +
         `OUVRIR LE DOCUMENT (lien valable jusqu'au ${expires}) :\n${link.signedUrl}\n\n` +
-        `À rendre avant : ${deadline} (48 h ouvrées).\n\n` +
         `Pour répondre, clique simplement sur "Répondre" : ta réponse partira à ${row.email}.\n` +
         `Le document sera supprimé automatiquement le ${expires}.`,
     }),
@@ -108,8 +126,7 @@ export async function POST(req: Request) {
       subject: "Kompa : votre document est bien reçu",
       text:
         `Bonjour ${greetingName},\n\n` +
-        `Nous avons bien reçu votre document. Vous recevrez une seconde lecture à cette adresse ` +
-        `sous 48 heures ouvrées.\n\n` +
+        formuleClient +
         `Votre document est conservé dans un espace privé, uniquement pour cette analyse, ` +
         `puis supprimé automatiquement ${SO_DOCUMENT_DAYS} jours après votre envoi.\n\n` +
         `${SO_DISCLAIMER}\n\n` +

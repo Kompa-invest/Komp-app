@@ -4,6 +4,14 @@ import { NextResponse, type NextRequest } from "next/server";
 // Rafraîchit la session Supabase à chaque requête et protège les pages
 // qui exigent un compte connecté (ex. /portfolio).
 export async function updateSession(request: NextRequest) {
+  // Lien de connexion arrivé sur l'accueil (« Site URL » de Supabase) au lieu de
+  // /auth/callback : on le fait suivre, pour que la connexion aboutisse quand même.
+  if (request.nextUrl.pathname === "/" && (request.nextUrl.searchParams.has("code") || request.nextUrl.searchParams.has("token_hash"))) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth/callback";
+    return NextResponse.redirect(url);
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

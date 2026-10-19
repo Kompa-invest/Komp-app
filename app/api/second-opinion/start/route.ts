@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
+import { planOf, type SoOffre } from "@/lib/kompa/offres";
 import {
   SO_BUCKET,
   SO_MAX_BYTES,
@@ -46,6 +48,21 @@ export async function POST(req: Request) {
   const fileName = text(body.fileName, 200).replace(/[^\p{L}\p{N}._ ()-]/gu, "");
   const fileSize = Number(body.fileSize);
 
+  // Formule de la demande : « prive » seulement si le compte connecté est bien membre
+  // (vérifié ici, pas sur la page) ; sinon analyse à l'unité, réglée après l'envoi.
+  let offer: SoOffre = "unite";
+  if (body.offer === "prive") {
+    try {
+      const session = await createClient();
+      const {
+        data: { user },
+      } = await session.auth.getUser();
+      if (planOf(user) === "prive") offer = "prive";
+    } catch {
+      // pas de session lisible : analyse à l'unité
+    }
+  }
+
   if (!firstName) return fail(400, "Merci d'indiquer votre prénom.");
   if (!lastName) return fail(400, "Merci d'indiquer votre nom.");
   if (!EMAIL_RE.test(email)) return fail(400, "Merci d'indiquer une adresse e-mail valide.");
@@ -75,7 +92,7 @@ export async function POST(req: Request) {
   const id = randomUUID();
   const path = `${id}/proposition.${ext}`;
 
-  const { error: insertError } = await supabase.from(SO_TABLE).insert({
+  const row = {
     id,
     full_name: `${firstName} ${lastName}`,
     civility,
@@ -88,7 +105,14 @@ export async function POST(req: Request) {
     file_size: fileSize,
     consent_at: new Date().toISOString(),
     status: "pending_upload",
-  });
+  };
+  let { error: insertError } = await supabase.from(SO_TABLE).insert({ ...row, offer });
+  // Si la colonne « offer » n'existe pas encore (script SQL pas encore exécuté),
+  // on enregistre quand même la demande, la formule étant notée dans le message.
+  if (insertError && /offer/i.test(insertError.message)) {
+    const tag = offer === "prive" ? "[Formule : membre Kompa Privé]" : "[Formule : à l'unité]";
+    ({ error: insertError } = await supabase.from(SO_TABLE).insert({ ...row, message: `${tag}\n${message}`.trim() }));
+  }
   if (insertError) {
     console.error("[second-opinion] start/insert", insertError);
     return fail(500, UNAVAILABLE);
