@@ -1,8 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SO_TABLE } from "@/lib/second-opinion/config";
-import { firstNameOf, planOf } from "@/lib/kompa/offres";
-import { fail, json, readJson } from "@/lib/kompa/http";
+import { FIRST_NAME_RE, firstNameOf, planOf } from "@/lib/kompa/offres";
+import { fail, json, readJson, text } from "@/lib/kompa/http";
 
 export const runtime = "nodejs";
 
@@ -38,7 +38,7 @@ export async function GET() {
   }
 
   return json({
-    user: { email: user.email ?? "", first: firstNameOf(user) },
+    user: { email: user.email ?? "", first: firstNameOf(user), since: user.created_at ?? null },
     plan: planOf(user),
     prefs: { magazine: meta.magazine === true },
     priveRequest: typeof meta.prive_request === "object" && meta.prive_request ? meta.prive_request : null,
@@ -46,20 +46,31 @@ export async function GET() {
   });
 }
 
-// Préférences d'e-mails (case « Le Magazine, chaque lundi »).
+// Réglages de Mon espace : préférence Magazine et/ou prénom.
 export async function PATCH(req: Request) {
   const body = await readJson(req);
-  if (!body || typeof body.magazine !== "boolean") return fail(400, "Requête invalide.");
+  if (!body) return fail(400, "Requête invalide.");
+  const data: Record<string, unknown> = {};
+  if ("magazine" in body) {
+    if (typeof body.magazine !== "boolean") return fail(400, "Requête invalide.");
+    data.magazine = body.magazine;
+  }
+  if ("first" in body) {
+    const first = text(body.first, 60).replace(/\s+/g, " ");
+    if (!FIRST_NAME_RE.test(first)) return fail(400, "Indiquez un prénom (lettres, espaces, tirets ou apostrophes).");
+    data.first_name = first;
+  }
+  if (!Object.keys(data).length) return fail(400, "Requête invalide.");
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return fail(401, "Connectez-vous pour modifier vos préférences.");
+  if (!user) return fail(401, "Connectez-vous pour modifier vos réglages.");
 
-  const { error } = await supabase.auth.updateUser({ data: { magazine: body.magazine } });
+  const { error } = await supabase.auth.updateUser({ data });
   if (error) {
-    console.error("[me] prefs", error.message);
+    console.error("[me] réglages", error.message);
     return fail(500, "Le réglage n'a pas pu être enregistré. Réessayez.");
   }
   return json({ ok: true });
