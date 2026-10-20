@@ -2352,17 +2352,54 @@ html.vt-soft::view-transition-new(root){animation:vt-fade-in .34s cubic-bezier(.
 @keyframes vt-fade-in{from{opacity:0}}
 /* premier affichage : le fond prend directement la position de la page, sans glisser */
 html.lux-now .lux i{transition:none!important}
-/* fond lumineux des pages intérieures (l'accueil garde ses lumières) : sur chaque page, lumière dorée à gauche, lumière blanche en haut à droite, lumière bleutée en bas à droite.
-   Avant, la lumière blanche se plaçait parfois à gauche, derrière le texte, et laissait ce côté presque blanc (Second Opinion, Mon espace, Méthode…). */
-html.in-page .lux .l1{background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,.66) 34%,rgba(255,255,255,.22) 66%,rgba(255,255,255,0))}
-html.in-page[data-lux="1"]{--x1:18vw;--y1:-44vh;--s1:1;--x2:-36vw;--y2:-16vh;--s2:.9;--x3:42vw;--y3:44vh;--s3:.8;--x4:10vw}
-html.in-page[data-lux="2"]{--x1:26vw;--y1:-40vh;--s1:.95;--x2:-40vw;--y2:-6vh;--s2:.95;--x3:36vw;--y3:52vh;--s3:.75;--x4:-6vw}
-html.in-page[data-lux="3"]{--x1:10vw;--y1:-50vh;--s1:1.1;--x2:-38vw;--y2:-24vh;--s2:.85;--x3:44vw;--y3:30vh;--s3:.9;--x4:24vw}
-html.in-page[data-lux="4"]{--x1:30vw;--y1:-32vh;--s1:.95;--x2:-30vw;--y2:-34vh;--s2:.9;--x3:24vw;--y3:56vh;--s3:.8;--x4:-20vw}
-html.in-page[data-lux="5"]{--x1:22vw;--y1:-46vh;--s1:1.05;--x2:-42vw;--y2:-4vh;--s2:.85;--x3:40vw;--y3:46vh;--s3:.85;--x4:30vw}
-html.in-page[data-lux="6"]{--x1:34vw;--y1:-36vh;--s1:1;--x2:-36vw;--y2:-28vh;--s2:.9;--x3:20vw;--y3:50vh;--s3:.75;--x4:-12vw}
-html.in-page[data-lux="7"]{--x1:14vw;--y1:-42vh;--s1:1.1;--x2:-44vw;--y2:-14vh;--s2:.85;--x3:42vw;--y3:28vh;--s3:.8;--x4:4vw}
-html.in-page[data-lux="10"]{--x1:30vw;--y1:-36vh;--s1:1;--x2:-36vw;--y2:-22vh;--s2:.85;--x3:34vw;--y3:48vh;--s3:.75;--x4:-2vw}
+/* (lot v5 : positions et intensités d'origine rétablies sur les pages intérieures) */
+
+
+
+
+
+
+
+
+
+
+
+/* ===================== lot v5 (20/10/2026) ===================== */
+/* Fond lumineux : un moteur de glissement (ressort amorti, voir LUXE) déplace les lumières ; les transitions CSS de position sont retirées. */
+html.lux-js .lux i{transition:opacity 2.4s ease}
+/* Mouvement d'ambiance : chaque lumière suit une boucle lente et fermée (somme de deux mouvements circulaires),
+   à vitesse quasi constante, sans arrêt ni demi-tour. Périodes différentes (197 à 311 s) : l'ensemble ne se répète pas
+   de façon perceptible. Remplace l'aller-retour « lx-drift » (28 et 34 s, ralenti à chaque extrémité). */
+.lux .l1{animation:lx-flow-l1 233s linear -61s infinite}
+.lux .l2{animation:lx-flow-l2 197s linear -38s infinite}
+.lux .l3{animation:lx-flow-l3 263s linear -127s infinite}
+.lux .l4{animation:lx-flow-l4 311s linear -90s infinite}
+@keyframes lx-flow-l1{0.000%{translate:0.000vw 0.000vh}0.833%{translate:-0.018vw 0.059vh}1.667%{translate:-0.042vw 0.116vh}2.500%{translate:-0.072vw 0.172vh}3.333%{translate:-0.107vw 0.225vh}4.167%{translate:-0.148vw 0.276vh}5.000%{translate:-0.194vw 0.325vh}5.833%{translate:-0.244vw 0.372vh}6.667%{translate:-0.299vw 0.417vh}7.500%{translate:-0.358vw 0.460vh}8.333%{translate:-0.421vw 0.501vh}9.167%{translate:-0.487vw 0.541vh}10.000%{translate:-0.557vw 0.578vh}10.833%{translate:-0.628vw 0.614vh}11.667%{translate:-0.703vw 0.648vh}12.500%{translate:-0.779vw 0.681vh}13.333%{translate:-0.856vw 0.712vh}14.167%{translate:-0.935vw 0.742vh}15.000%{translate:-1.015vw 0.770vh}15.833%{translate:-1.095vw 0.797vh}16.667%{translate:-1.175vw 0.823vh}17.500%{translate:-1.255vw 0.847vh}18.333%{translate:-1.335vw 0.870vh}19.167%{translate:-1.415vw 0.892vh}20.000%{translate:-1.493vw 0.912vh}20.833%{translate:-1.571vw 0.931vh}21.667%{translate:-1.647vw 0.949vh}22.500%{translate:-1.722vw 0.965vh}23.333%{translate:-1.795vw 0.980vh}24.167%{translate:-1.867vw 0.993vh}25.000%{translate:-1.937vw 1.005vh}25.833%{translate:-2.005vw 1.014vh}26.667%{translate:-2.071vw 1.022vh}27.500%{translate:-2.135vw 1.028vh}28.333%{translate:-2.197vw 1.031vh}29.167%{translate:-2.257vw 1.032vh}30.000%{translate:-2.316vw 1.031vh}30.833%{translate:-2.372vw 1.027vh}31.667%{translate:-2.426vw 1.020vh}32.500%{translate:-2.479vw 1.010vh}33.333%{translate:-2.530vw 0.998vh}34.167%{translate:-2.579vw 0.982vh}35.000%{translate:-2.626vw 0.962vh}35.833%{translate:-2.672vw 0.939vh}36.667%{translate:-2.716vw 0.913vh}37.500%{translate:-2.758vw 0.883vh}38.333%{translate:-2.799vw 0.849vh}39.167%{translate:-2.838vw 0.812vh}40.000%{translate:-2.876vw 0.770vh}40.833%{translate:-2.912vw 0.725vh}41.667%{translate:-2.947vw 0.676vh}42.500%{translate:-2.980vw 0.623vh}43.333%{translate:-3.012vw 0.567vh}44.167%{translate:-3.042vw 0.507vh}45.000%{translate:-3.071vw 0.444vh}45.833%{translate:-3.097vw 0.377vh}46.667%{translate:-3.122vw 0.307vh}47.500%{translate:-3.145vw 0.234vh}48.333%{translate:-3.165vw 0.158vh}49.167%{translate:-3.184vw 0.080vh}50.000%{translate:-3.200vw 0.000vh}50.833%{translate:-3.214vw -0.082vh}51.667%{translate:-3.224vw -0.166vh}52.500%{translate:-3.232vw -0.251vh}53.333%{translate:-3.237vw -0.337vh}54.167%{translate:-3.239vw -0.423vh}55.000%{translate:-3.237vw -0.509vh}55.833%{translate:-3.232vw -0.596vh}56.667%{translate:-3.223vw -0.681vh}57.500%{translate:-3.210vw -0.766vh}58.333%{translate:-3.193vw -0.849vh}59.167%{translate:-3.171vw -0.930vh}60.000%{translate:-3.145vw -1.009vh}60.833%{translate:-3.115vw -1.085vh}61.667%{translate:-3.081vw -1.158vh}62.500%{translate:-3.041vw -1.228vh}63.333%{translate:-2.997vw -1.294vh}64.167%{translate:-2.949vw -1.356vh}65.000%{translate:-2.896vw -1.414vh}65.833%{translate:-2.838vw -1.467vh}66.667%{translate:-2.775vw -1.516vh}67.500%{translate:-2.708vw -1.559vh}68.333%{translate:-2.637vw -1.596vh}69.167%{translate:-2.562vw -1.629vh}70.000%{translate:-2.482vw -1.656vh}70.833%{translate:-2.399vw -1.677vh}71.667%{translate:-2.312vw -1.692vh}72.500%{translate:-2.222vw -1.701vh}73.333%{translate:-2.130vw -1.705vh}74.167%{translate:-2.034vw -1.703vh}75.000%{translate:-1.937vw -1.695vh}75.833%{translate:-1.837vw -1.682vh}76.667%{translate:-1.736vw -1.663vh}77.500%{translate:-1.634vw -1.639vh}78.333%{translate:-1.532vw -1.610vh}79.167%{translate:-1.429vw -1.576vh}80.000%{translate:-1.327vw -1.537vh}80.833%{translate:-1.225vw -1.494vh}81.667%{translate:-1.125vw -1.446vh}82.500%{translate:-1.026vw -1.395vh}83.333%{translate:-0.930vw -1.341vh}84.167%{translate:-0.836vw -1.283vh}85.000%{translate:-0.745vw -1.222vh}85.833%{translate:-0.658vw -1.159vh}86.667%{translate:-0.574vw -1.094vh}87.500%{translate:-0.495vw -1.026vh}88.333%{translate:-0.421vw -0.958vh}89.167%{translate:-0.351vw -0.888vh}90.000%{translate:-0.287vw -0.817vh}90.833%{translate:-0.228vw -0.745vh}91.667%{translate:-0.176vw -0.674vh}92.500%{translate:-0.129vw -0.602vh}93.333%{translate:-0.089vw -0.531vh}94.167%{translate:-0.055vw -0.461vh}95.000%{translate:-0.027vw -0.391vh}95.833%{translate:-0.006vw -0.322vh}96.667%{translate:0.008vw -0.255vh}97.500%{translate:0.016vw -0.188vh}98.333%{translate:0.017vw -0.124vh}99.167%{translate:0.012vw -0.061vh}100.000%{translate:0.000vw -0.000vh}}
+@keyframes lx-flow-l2{0.000%{translate:0.000vw 0.000vh}0.833%{translate:-0.034vw -0.076vh}1.667%{translate:-0.075vw -0.152vh}2.500%{translate:-0.123vw -0.229vh}3.333%{translate:-0.177vw -0.306vh}4.167%{translate:-0.237vw -0.384vh}5.000%{translate:-0.303vw -0.463vh}5.833%{translate:-0.373vw -0.542vh}6.667%{translate:-0.449vw -0.621vh}7.500%{translate:-0.529vw -0.700vh}8.333%{translate:-0.612vw -0.780vh}9.167%{translate:-0.699vw -0.860vh}10.000%{translate:-0.789vw -0.940vh}10.833%{translate:-0.881vw -1.019vh}11.667%{translate:-0.976vw -1.098vh}12.500%{translate:-1.072vw -1.176vh}13.333%{translate:-1.170vw -1.253vh}14.167%{translate:-1.269vw -1.329vh}15.000%{translate:-1.369vw -1.403vh}15.833%{translate:-1.470vw -1.475vh}16.667%{translate:-1.571vw -1.546vh}17.500%{translate:-1.672vw -1.613vh}18.333%{translate:-1.773vw -1.678vh}19.167%{translate:-1.873vw -1.740vh}20.000%{translate:-1.973vw -1.798vh}20.833%{translate:-2.073vw -1.853vh}21.667%{translate:-2.172vw -1.903vh}22.500%{translate:-2.270vw -1.948vh}23.333%{translate:-2.368vw -1.989vh}24.167%{translate:-2.465vw -2.024vh}25.000%{translate:-2.560vw -2.053vh}25.833%{translate:-2.655vw -2.077vh}26.667%{translate:-2.750vw -2.094vh}27.500%{translate:-2.843vw -2.106vh}28.333%{translate:-2.935vw -2.110vh}29.167%{translate:-3.026vw -2.107vh}30.000%{translate:-3.117vw -2.098vh}30.833%{translate:-3.207vw -2.081vh}31.667%{translate:-3.295vw -2.057vh}32.500%{translate:-3.383vw -2.026vh}33.333%{translate:-3.470vw -1.987vh}34.167%{translate:-3.556vw -1.941vh}35.000%{translate:-3.641vw -1.888vh}35.833%{translate:-3.725vw -1.827vh}36.667%{translate:-3.807vw -1.760vh}37.500%{translate:-3.888vw -1.685vh}38.333%{translate:-3.968vw -1.604vh}39.167%{translate:-4.046vw -1.517vh}40.000%{translate:-4.122vw -1.424vh}40.833%{translate:-4.196vw -1.325vh}41.667%{translate:-4.268vw -1.222vh}42.500%{translate:-4.338vw -1.113vh}43.333%{translate:-4.404vw -1.000vh}44.167%{translate:-4.468vw -0.883vh}45.000%{translate:-4.528vw -0.762vh}45.833%{translate:-4.584vw -0.639vh}46.667%{translate:-4.637vw -0.514vh}47.500%{translate:-4.685vw -0.386vh}48.333%{translate:-4.729vw -0.258vh}49.167%{translate:-4.767vw -0.129vh}50.000%{translate:-4.800vw -0.000vh}50.833%{translate:-4.827vw 0.128vh}51.667%{translate:-4.849vw 0.256vh}52.500%{translate:-4.864vw 0.381vh}53.333%{translate:-4.872vw 0.505vh}54.167%{translate:-4.874vw 0.625vh}55.000%{translate:-4.868vw 0.742vh}55.833%{translate:-4.855vw 0.856vh}56.667%{translate:-4.834vw 0.965vh}57.500%{translate:-4.805vw 1.070vh}58.333%{translate:-4.769vw 1.170vh}59.167%{translate:-4.724vw 1.264vh}60.000%{translate:-4.672vw 1.353vh}60.833%{translate:-4.611vw 1.436vh}61.667%{translate:-4.543vw 1.512vh}62.500%{translate:-4.466vw 1.582vh}63.333%{translate:-4.382vw 1.646vh}64.167%{translate:-4.290vw 1.702vh}65.000%{translate:-4.191vw 1.752vh}65.833%{translate:-4.084vw 1.796vh}66.667%{translate:-3.971vw 1.832vh}67.500%{translate:-3.851vw 1.862vh}68.333%{translate:-3.725vw 1.885vh}69.167%{translate:-3.593vw 1.901vh}70.000%{translate:-3.457vw 1.911vh}70.833%{translate:-3.315vw 1.915vh}71.667%{translate:-3.170vw 1.912vh}72.500%{translate:-3.021vw 1.904vh}73.333%{translate:-2.870vw 1.890vh}74.167%{translate:-2.716vw 1.871vh}75.000%{translate:-2.560vw 1.847vh}75.833%{translate:-2.404vw 1.818vh}76.667%{translate:-2.248vw 1.784vh}77.500%{translate:-2.092vw 1.746vh}78.333%{translate:-1.937vw 1.705vh}79.167%{translate:-1.784vw 1.660vh}80.000%{translate:-1.634vw 1.611vh}80.833%{translate:-1.486vw 1.560vh}81.667%{translate:-1.343vw 1.506vh}82.500%{translate:-1.204vw 1.449vh}83.333%{translate:-1.070vw 1.391vh}84.167%{translate:-0.942vw 1.330vh}85.000%{translate:-0.819vw 1.268vh}85.833%{translate:-0.704vw 1.204vh}86.667%{translate:-0.595vw 1.139vh}87.500%{translate:-0.494vw 1.072vh}88.333%{translate:-0.401vw 1.005vh}89.167%{translate:-0.316vw 0.937vh}90.000%{translate:-0.239vw 0.868vh}90.833%{translate:-0.171vw 0.799vh}91.667%{translate:-0.111vw 0.728vh}92.500%{translate:-0.061vw 0.658vh}93.333%{translate:-0.019vw 0.587vh}94.167%{translate:0.013vw 0.515vh}95.000%{translate:0.037vw 0.443vh}95.833%{translate:0.052vw 0.370vh}96.667%{translate:0.058vw 0.297vh}97.500%{translate:0.056vw 0.224vh}98.333%{translate:0.045vw 0.150vh}99.167%{translate:0.026vw 0.075vh}100.000%{translate:0.000vw 0.000vh}}
+@keyframes lx-flow-l3{0.000%{translate:0.000vw 0.000vh}0.833%{translate:-0.021vw 0.107vh}1.667%{translate:-0.046vw 0.211vh}2.500%{translate:-0.074vw 0.313vh}3.333%{translate:-0.105vw 0.410vh}4.167%{translate:-0.139vw 0.505vh}5.000%{translate:-0.177vw 0.595vh}5.833%{translate:-0.217vw 0.681vh}6.667%{translate:-0.260vw 0.763vh}7.500%{translate:-0.305vw 0.840vh}8.333%{translate:-0.353vw 0.912vh}9.167%{translate:-0.403vw 0.980vh}10.000%{translate:-0.456vw 1.043vh}10.833%{translate:-0.511vw 1.101vh}11.667%{translate:-0.568vw 1.155vh}12.500%{translate:-0.628vw 1.203vh}13.333%{translate:-0.689vw 1.247vh}14.167%{translate:-0.753vw 1.286vh}15.000%{translate:-0.820vw 1.320vh}15.833%{translate:-0.888vw 1.350vh}16.667%{translate:-0.959vw 1.376vh}17.500%{translate:-1.033vw 1.397vh}18.333%{translate:-1.108vw 1.414vh}19.167%{translate:-1.187vw 1.427vh}20.000%{translate:-1.267vw 1.437vh}20.833%{translate:-1.350vw 1.442vh}21.667%{translate:-1.436vw 1.445vh}22.500%{translate:-1.524vw 1.444vh}23.333%{translate:-1.614vw 1.439vh}24.167%{translate:-1.707vw 1.432vh}25.000%{translate:-1.802vw 1.422vh}25.833%{translate:-1.899vw 1.409vh}26.667%{translate:-1.998vw 1.394vh}27.500%{translate:-2.099vw 1.376vh}28.333%{translate:-2.202vw 1.356vh}29.167%{translate:-2.307vw 1.333vh}30.000%{translate:-2.412vw 1.309vh}30.833%{translate:-2.519vw 1.281vh}31.667%{translate:-2.627vw 1.252vh}32.500%{translate:-2.735vw 1.221vh}33.333%{translate:-2.843vw 1.187vh}34.167%{translate:-2.952vw 1.151vh}35.000%{translate:-3.059vw 1.113vh}35.833%{translate:-3.166vw 1.073vh}36.667%{translate:-3.271vw 1.030vh}37.500%{translate:-3.374vw 0.985vh}38.333%{translate:-3.475vw 0.938vh}39.167%{translate:-3.574vw 0.888vh}40.000%{translate:-3.669vw 0.836vh}40.833%{translate:-3.760vw 0.781vh}41.667%{translate:-3.848vw 0.724vh}42.500%{translate:-3.931vw 0.664vh}43.333%{translate:-4.008vw 0.601vh}44.167%{translate:-4.081vw 0.535vh}45.000%{translate:-4.147vw 0.467vh}45.833%{translate:-4.207vw 0.396vh}46.667%{translate:-4.261vw 0.322vh}47.500%{translate:-4.307vw 0.245vh}48.333%{translate:-4.346vw 0.166vh}49.167%{translate:-4.377vw 0.084vh}50.000%{translate:-4.400vw 0.000vh}50.833%{translate:-4.415vw -0.087vh}51.667%{translate:-4.422vw -0.175vh}52.500%{translate:-4.420vw -0.266vh}53.333%{translate:-4.409vw -0.359vh}54.167%{translate:-4.390vw -0.453vh}55.000%{translate:-4.361vw -0.549vh}55.833%{translate:-4.325vw -0.645vh}56.667%{translate:-4.279vw -0.742vh}57.500%{translate:-4.226vw -0.840vh}58.333%{translate:-4.164vw -0.938vh}59.167%{translate:-4.094vw -1.035vh}60.000%{translate:-4.016vw -1.132vh}60.833%{translate:-3.930vw -1.227vh}61.667%{translate:-3.838vw -1.321vh}62.500%{translate:-3.739vw -1.413vh}63.333%{translate:-3.634vw -1.503vh}64.167%{translate:-3.522vw -1.590vh}65.000%{translate:-3.406vw -1.673vh}65.833%{translate:-3.285vw -1.753vh}66.667%{translate:-3.159vw -1.829vh}67.500%{translate:-3.030vw -1.900vh}68.333%{translate:-2.898vw -1.966vh}69.167%{translate:-2.763vw -2.027vh}70.000%{translate:-2.627vw -2.082vh}70.833%{translate:-2.489vw -2.132vh}71.667%{translate:-2.351vw -2.175vh}72.500%{translate:-2.212vw -2.211vh}73.333%{translate:-2.074vw -2.240vh}74.167%{translate:-1.937vw -2.263vh}75.000%{translate:-1.802vw -2.278vh}75.833%{translate:-1.669vw -2.285vh}76.667%{translate:-1.538vw -2.286vh}77.500%{translate:-1.411vw -2.278vh}78.333%{translate:-1.287vw -2.263vh}79.167%{translate:-1.168vw -2.241vh}80.000%{translate:-1.053vw -2.210vh}80.833%{translate:-0.943vw -2.173vh}81.667%{translate:-0.837vw -2.128vh}82.500%{translate:-0.738vw -2.076vh}83.333%{translate:-0.643vw -2.017vh}84.167%{translate:-0.555vw -1.952vh}85.000%{translate:-0.473vw -1.880vh}85.833%{translate:-0.397vw -1.803vh}86.667%{translate:-0.327vw -1.719vh}87.500%{translate:-0.263vw -1.631vh}88.333%{translate:-0.205vw -1.538vh}89.167%{translate:-0.154vw -1.440vh}90.000%{translate:-0.109vw -1.339vh}90.833%{translate:-0.070vw -1.234vh}91.667%{translate:-0.037vw -1.126vh}92.500%{translate:-0.010vw -1.016vh}93.333%{translate:0.011vw -0.904vh}94.167%{translate:0.027vw -0.791vh}95.000%{translate:0.038vw -0.677vh}95.833%{translate:0.043vw -0.562vh}96.667%{translate:0.043vw -0.447vh}97.500%{translate:0.039vw -0.334vh}98.333%{translate:0.030vw -0.221vh}99.167%{translate:0.017vw -0.109vh}100.000%{translate:0.000vw -0.000vh}}
+@keyframes lx-flow-l4{0.000%{translate:0.000vw 0.000vh}0.833%{translate:-0.007vw -0.055vh}1.667%{translate:-0.019vw -0.110vh}2.500%{translate:-0.035vw -0.167vh}3.333%{translate:-0.055vw -0.224vh}4.167%{translate:-0.079vw -0.282vh}5.000%{translate:-0.106vw -0.341vh}5.833%{translate:-0.138vw -0.399vh}6.667%{translate:-0.172vw -0.458vh}7.500%{translate:-0.210vw -0.516vh}8.333%{translate:-0.251vw -0.573vh}9.167%{translate:-0.295vw -0.629vh}10.000%{translate:-0.341vw -0.685vh}10.833%{translate:-0.390vw -0.739vh}11.667%{translate:-0.440vw -0.791vh}12.500%{translate:-0.493vw -0.842vh}13.333%{translate:-0.547vw -0.890vh}14.167%{translate:-0.602vw -0.936vh}15.000%{translate:-0.658vw -0.979vh}15.833%{translate:-0.716vw -1.020vh}16.667%{translate:-0.773vw -1.058vh}17.500%{translate:-0.832vw -1.092vh}18.333%{translate:-0.890vw -1.124vh}19.167%{translate:-0.948vw -1.151vh}20.000%{translate:-1.006vw -1.175vh}20.833%{translate:-1.064vw -1.196vh}21.667%{translate:-1.121vw -1.212vh}22.500%{translate:-1.177vw -1.225vh}23.333%{translate:-1.232vw -1.233vh}24.167%{translate:-1.287vw -1.238vh}25.000%{translate:-1.339vw -1.238vh}25.833%{translate:-1.391vw -1.234vh}26.667%{translate:-1.441vw -1.227vh}27.500%{translate:-1.490vw -1.215vh}28.333%{translate:-1.537vw -1.200vh}29.167%{translate:-1.583vw -1.180vh}30.000%{translate:-1.627vw -1.157vh}30.833%{translate:-1.669vw -1.131vh}31.667%{translate:-1.710vw -1.101vh}32.500%{translate:-1.749vw -1.067vh}33.333%{translate:-1.786vw -1.031vh}34.167%{translate:-1.821vw -0.992vh}35.000%{translate:-1.855vw -0.950vh}35.833%{translate:-1.887vw -0.906vh}36.667%{translate:-1.918vw -0.859vh}37.500%{translate:-1.947vw -0.811vh}38.333%{translate:-1.974vw -0.760vh}39.167%{translate:-2.000vw -0.708vh}40.000%{translate:-2.025vw -0.655vh}40.833%{translate:-2.047vw -0.601vh}41.667%{translate:-2.069vw -0.546vh}42.500%{translate:-2.089vw -0.491vh}43.333%{translate:-2.107vw -0.435vh}44.167%{translate:-2.124vw -0.379vh}45.000%{translate:-2.139vw -0.323vh}45.833%{translate:-2.153vw -0.267vh}46.667%{translate:-2.166vw -0.212vh}47.500%{translate:-2.177vw -0.157vh}48.333%{translate:-2.186vw -0.104vh}49.167%{translate:-2.194vw -0.051vh}50.000%{translate:-2.200vw -0.000vh}50.833%{translate:-2.204vw 0.050vh}51.667%{translate:-2.207vw 0.099vh}52.500%{translate:-2.208vw 0.146vh}53.333%{translate:-2.207vw 0.191vh}54.167%{translate:-2.204vw 0.235vh}55.000%{translate:-2.199vw 0.277vh}55.833%{translate:-2.192vw 0.317vh}56.667%{translate:-2.182vw 0.356vh}57.500%{translate:-2.170vw 0.392vh}58.333%{translate:-2.156vw 0.427vh}59.167%{translate:-2.140vw 0.460vh}60.000%{translate:-2.121vw 0.491vh}60.833%{translate:-2.099vw 0.520vh}61.667%{translate:-2.075vw 0.547vh}62.500%{translate:-2.048vw 0.573vh}63.333%{translate:-2.019vw 0.596vh}64.167%{translate:-1.986vw 0.618vh}65.000%{translate:-1.951vw 0.639vh}65.833%{translate:-1.914vw 0.657vh}66.667%{translate:-1.873vw 0.674vh}67.500%{translate:-1.830vw 0.690vh}68.333%{translate:-1.785vw 0.703vh}69.167%{translate:-1.737vw 0.716vh}70.000%{translate:-1.686vw 0.727vh}70.833%{translate:-1.633vw 0.736vh}71.667%{translate:-1.578vw 0.744vh}72.500%{translate:-1.521vw 0.751vh}73.333%{translate:-1.462vw 0.756vh}74.167%{translate:-1.402vw 0.760vh}75.000%{translate:-1.339vw 0.762vh}75.833%{translate:-1.276vw 0.763vh}76.667%{translate:-1.211vw 0.762vh}77.500%{translate:-1.146vw 0.760vh}78.333%{translate:-1.080vw 0.757vh}79.167%{translate:-1.013vw 0.752vh}80.000%{translate:-0.947vw 0.745vh}80.833%{translate:-0.881vw 0.736vh}81.667%{translate:-0.815vw 0.726vh}82.500%{translate:-0.750vw 0.715vh}83.333%{translate:-0.686vw 0.701vh}84.167%{translate:-0.623vw 0.685vh}85.000%{translate:-0.562vw 0.668vh}85.833%{translate:-0.503vw 0.649vh}86.667%{translate:-0.446vw 0.627vh}87.500%{translate:-0.391vw 0.604vh}88.333%{translate:-0.339vw 0.578vh}89.167%{translate:-0.290vw 0.550vh}90.000%{translate:-0.245vw 0.520vh}90.833%{translate:-0.202vw 0.488vh}91.667%{translate:-0.163vw 0.454vh}92.500%{translate:-0.128vw 0.417vh}93.333%{translate:-0.097vw 0.379vh}94.167%{translate:-0.070vw 0.338vh}95.000%{translate:-0.047vw 0.295vh}95.833%{translate:-0.028vw 0.251vh}96.667%{translate:-0.014vw 0.204vh}97.500%{translate:-0.004vw 0.155vh}98.333%{translate:0.002vw 0.105vh}99.167%{translate:0.003vw 0.053vh}100.000%{translate:0.000vw 0.000vh}}
+/* Les deux lignes diagonales avancent dans le même sens d'une section à la suivante (avant : un coup en haut, un coup en bas). */
+html[data-lux="1"]{--x4:-28vw}
+html[data-lux="2"]{--x4:-22vw}
+html[data-lux="3"]{--x4:-16vw}
+html[data-lux="4"]{--x4:-10vw}
+html[data-lux="5"]{--x4:-4vw}
+html[data-lux="6"]{--x4:2vw}
+html[data-lux="7"]{--x4:8vw}
+html[data-lux="8"]{--x4:12vw}
+html[data-lux="9"]{--x4:16vw}
+html[data-lux="10"]{--x4:-2vw}
+/* Second Opinion, Mon espace et Méthode : la lumière blanche ne se pose plus derrière le texte (doré et bleu : positions d'origine). */
+html.in-page[data-lux="2"]{--x1:4vw;--y1:-46vh}
+html.in-page[data-lux="10"]{--x1:4vw;--y1:-46vh}
+/* Conteneur de la transformation carte ↔ fiche du Décodeur */
+.mx-box{position:fixed;z-index:45;pointer-events:none;overflow:hidden;box-sizing:border-box;border:1px solid transparent}
+.mx-in{pointer-events:none}
+@media (prefers-reduced-motion:reduce){.lux .l1,.lux .l2,.lux .l3,.lux .l4{animation:none}}
+/* Kompa Privé : passage clair ↔ sombre en douceur (fond et en-tête ensemble). L'animation « chocolat » du bouton garde la sienne. */
+.plux{transition:opacity .9s ease,visibility .9s}
+html.pv-switch .top,html.pv-switch .top :not(.pvbtn,.pvbtn *),html.pv-switch .tabbar,html.pv-switch .tabbar *{transition:color .9s ease,background-color .9s ease,border-color .9s ease,box-shadow .9s ease,fill .9s ease,stroke .9s ease!important}
+.mx-old{position:fixed;inset:0;z-index:44;pointer-events:none;overflow:hidden}
 
 </style>
 </head>
@@ -3039,7 +3076,7 @@ route(/^decodeur$/, () => {
         const cmp = getCmp(); const slot = $('#cmp-slot', root);
         slot.innerHTML = cmp.length ? `<div class="cmp-bar"><span class="small">${cmp.length} produit${cmp.length > 1 ? 's' : ''} à comparer${cmp.length < 2 ? ' : choisissez-en un autre' : ''}</span><span style="display:flex;gap:8px"><button class="btn btn-sm" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)" data-cmp-clear>Vider</button><button class="btn btn-sm" data-go="comparer" ${cmp.length < 2 ? 'disabled' : ''}>Comparer</button></span></div>` : '';
       };
-      const open = card => { DEC_POS = { y: scrollY, rows: $$('.lrow', list).map(r => r.scrollLeft), open: $$('.lgroup', list).map(g => g.classList.contains('rx-open')) }; softNav('decodeur/' + card.dataset.open); };
+      const open = card => { DEC_POS = { y: scrollY, rows: $$('.lrow', list).map(r => r.scrollLeft), open: $$('.lgroup', list).map(g => g.classList.contains('rx-open')) }; MORPH = { kind: 'open', card }; go('decodeur/' + card.dataset.open); };
       $('#dec-q', root).addEventListener('input', e => { decState.q = e.target.value; draw(); });
       $('#dec-form', root).addEventListener('submit', e => { e.preventDefault(); const c = $$('.pcard', list); if (c.length === 1 || (c.length && decState.q.trim())) open(c[0]); });
       $('#dec-cats', root).addEventListener('click', e => {
@@ -6163,12 +6200,17 @@ render = (function (orig) {
     o = o || {};
     if (navBusy) { want = [p, o]; return; }
     const isNav = !o.keepScroll && curPath !== null && String(p).split('?')[0] !== curPath;
-    if (isNav) { navBusy = true; want = [p, o]; }
+    if (isNav) {
+      navBusy = true; want = [p, o];
+      const dp = String(p).split('?')[0];
+      if (!MORPH && dp === 'decodeur' && /^decodeur\/[\w-]+$/.test(curPath || '')) MORPH = { kind: 'close', id: curPath.slice(9) };
+      setInPage(dp !== ''); setLux(dp === '' ? 0 : luxFor(dp));
+    }
     withTransition(() => {
       if (want) { p = want[0]; o = want[1]; want = null; }
       navBusy = false;
       const path = String(p).split('?')[0];
-      closeAuth(); const m = $('#acct-menu'); if (m) m.hidden = true; PREV_PATH = curPath; orig(p, o); drawTray(); document.documentElement.classList.toggle('in-page', path !== ''); textPass($('#main')); trTitle(); if (path !== '') setLux(luxFor(path)); const pvOn = /^(prive|premium|abonnement|tarifs)$/.test(path); document.documentElement.classList.toggle('pv-mode', pvOn); $$('.pvbtn').forEach(b => b.classList.toggle('go', pvOn)); pvLuxUpdate();
+      closeAuth(); const m = $('#acct-menu'); if (m) m.hidden = true; PREV_PATH = curPath; orig(p, o); drawTray(); setInPage(path !== ''); textPass($('#main')); trTitle(); if (path !== '') setLux(luxFor(path)); const pvOn = /^(prive|premium|abonnement|tarifs)$/.test(path); pvSet(pvOn); $$('.pvbtn').forEach(b => b.classList.toggle('go', pvOn)); pvLuxUpdate();
     }, isNav);
   };
 })(render);
@@ -6194,6 +6236,242 @@ document.addEventListener('click', e => {
   authEmail = mail; authMag = true; openAuth('signup');
 });
 
+/* ===================== lot v5 : fond continu, fondus entre pages, carte qui se transforme en fiche ===================== */
+
+/* ---------- fond lumineux : un seul calque, jamais recréé, qui glisse en continu vers la composition de chaque section ----------
+   Les positions cibles restent celles du CSS (html[data-lux="…"]). Un ressort à amortissement critique les rejoint :
+   départ en douceur, arrivée sans rebond, et si la cible change en cours de route, la vitesse est conservée (aucun à-coup). */
+const LUXE = (() => {
+  const el = document.querySelector('.lux');
+  const KEYS = ['x1', 'y1', 's1', 'x2', 'y2', 's2', 'x3', 'y3', 's3', 'x4'];
+  const W = 2.0; /* raideur : environ 2,4 s pour rejoindre la cible */
+  let cur = null, vel = {}, tgt = {}, unit = {}, raf = 0, last = 0, instant = true;
+  const read = () => {
+    const cs = getComputedStyle(document.documentElement), o = {}, ok = {};
+    KEYS.forEach(k => { const v = cs.getPropertyValue('--' + k).trim(), m = v.match(/^(-?[\d.]+)([a-z%]*)$/); ok[k] = !!m; o[k] = m ? parseFloat(m[1]) : 0; if (m) unit[k] = m[2]; else if (!(k in unit)) unit[k] = k[0] === 'x' ? 'vw' : k[0] === 'y' ? 'vh' : ''; });
+    /* Sur la première scène de l'accueil, --s1, --s2 et --s3 valent les couleurs des graphiques (définies sur :root) :
+       le navigateur ignore alors la transformation et les trois lumières restent centrées, à leur taille normale.
+       C'est le rendu en ligne depuis toujours ; on le reproduit tel quel (décalage nul, échelle 1). */
+    [1, 2, 3].forEach(n => { if (!ok['s' + n] || !ok['x' + n] || !ok['y' + n]) { o['x' + n] = 0; o['y' + n] = 0; o['s' + n] = 1; } });
+    return o;
+  };
+  const apply = () => { if (!el) return; KEYS.forEach(k => el.style.setProperty('--' + k, cur[k].toFixed(3) + unit[k])); };
+  function step(now) {
+    const dt = Math.min(0.064, Math.max(0, (now - last) / 1000)); last = now;
+    let moving = false; const e = Math.exp(-W * dt);
+    KEYS.forEach(k => {
+      /* solution exacte du ressort critique sur dt : stable quelle que soit la fréquence d'images */
+      const x0 = cur[k] - tgt[k], v0 = vel[k] || 0, c = v0 + W * x0;
+      const x = (x0 + c * dt) * e, v = (v0 - W * c * dt) * e;
+      cur[k] = tgt[k] + x; vel[k] = v;
+      if (Math.abs(x) > 0.004 || Math.abs(v) > 0.004) moving = true;
+    });
+    if (!moving) { KEYS.forEach(k => { cur[k] = tgt[k]; vel[k] = 0; }); }
+    apply();
+    raf = moving ? requestAnimationFrame(step) : 0;
+  }
+  function retarget() {
+    if (!el) return;
+    tgt = read();
+    if (!cur || instant || reduceMotion) { cur = Object.assign({}, tgt); KEYS.forEach(k => { vel[k] = 0; }); apply(); return; }
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+  }
+  if (el) document.documentElement.classList.add('lux-js');
+  return { retarget, live() { instant = false; }, isLive: () => !instant };
+})();
+setLux = function (n) { document.documentElement.setAttribute('data-lux', String(n)); LUXE.retarget(); };
+function setInPage(on) { const H = document.documentElement; if (H.classList.contains('in-page') !== on) { H.classList.toggle('in-page', on); LUXE.retarget(); } }
+
+/* ---------- changement de page : le contenu se fond, le fond reste vivant ----------
+   Ordre : le contenu s'efface (0,2 s) ; la nouvelle page est construite pendant qu'il est invisible ; on attend que le
+   navigateur l'ait affichée une première fois (deux images), puis le contenu réapparaît. Ainsi le temps de construction
+   d'une page lourde ne « mange » pas le début du fondu (avant : le contenu et le fond sombre de Kompa Privé
+   apparaissaient d'un coup à 20 ou 60 %). */
+let MORPH = null, FADING = false, PV_PENDING = null, MX_SEQ = 0;
+const MX = { open: 640, close: 560, ease: 'cubic-bezier(.45,.05,.2,1)', out: 200 };
+const afterPaint = fn => requestAnimationFrame(() => requestAnimationFrame(fn));
+/* Kompa Privé (fond sombre) : le passage clair ↔ sombre suit le fondu du contenu, et l'en-tête change de couleur en douceur
+   (avant : l'en-tête basculait d'une image à l'autre). */
+function pvApply(on) {
+  const H = document.documentElement;
+  if (H.classList.contains('pv-mode') !== on) {
+    if (LUXE.isLive() && !reduceMotion) { H.classList.add('pv-switch'); clearTimeout(pvApply.t); pvApply.t = setTimeout(() => H.classList.remove('pv-switch'), 1100); }
+    H.classList.toggle('pv-mode', on);
+  }
+  pvLuxUpdate();
+}
+function pvSet(on) { if (FADING) PV_PENDING = on; else pvApply(on); }
+function pvFlush() { if (PV_PENDING !== null) { const v = PV_PENDING; PV_PENDING = null; pvApply(v); } }
+function runUpdate(update) { FADING = true; try { update(); } finally { FADING = false; } }
+function fadeOutPage(els) { return els.filter(Boolean).map(e => e.animate([{ opacity: getComputedStyle(e).opacity }, { opacity: 0 }], { duration: MX.out, easing: 'cubic-bezier(.4,0,.8,.6)', fill: 'forwards' })); }
+function afterOut(anims, fn) { let done = false; const run = () => { if (done) return; done = true; fn(); }; Promise.all(anims.map(a => a.finished)).then(run, run); setTimeout(run, MX.out + 250); }
+/* garde le contenu invisible le temps du premier affichage de la nouvelle page */
+function holdPage(outs) {
+  const m = $('#main'), f = $('.foot');
+  if (m) m.style.opacity = '0'; if (f) f.style.opacity = '0';
+  outs.forEach(a => { try { a.cancel(); } catch (e) { } });
+  return () => { if (m) m.style.opacity = ''; if (f) f.style.opacity = ''; };
+}
+function fadeInPage(delay) {
+  const m = $('#main'), f = $('.foot');
+  if (m) m.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 460, delay: delay || 0, easing: 'cubic-bezier(.25,.6,.3,1)', fill: 'backwards' });
+  if (f) f.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 460, delay: (delay || 0) + 80, easing: 'ease-out', fill: 'backwards' });
+}
+function pageFade(update) {
+  const seq = MX_SEQ, outs = fadeOutPage([$('#main'), $('.foot')]);
+  afterOut(outs, () => {
+    runUpdate(update);
+    const show = holdPage(outs);
+    /* vers ou depuis Kompa Privé, le fond change de teinte : le contenu attend qu'il ait commencé à le faire */
+    const pvc = PV_PENDING !== null && PV_PENDING !== document.documentElement.classList.contains('pv-mode');
+    afterPaint(() => { if (seq !== MX_SEQ) return; show(); pvFlush(); fadeInPage(pvc ? 220 : 0); });
+  });
+}
+/* Nouvelle navigation pendant qu'une transition se termine : on repart de l'état affiché (pas de saut), et les calques
+   de la transition précédente s'effacent au lieu de rester par-dessus la nouvelle page. */
+function settle() {
+  MX_SEQ++;
+  [$('#main'), $('.foot')].forEach(e => {
+    if (!e || !e.getAnimations) return;
+    const o = getComputedStyle(e).opacity; e.getAnimations().forEach(a => { try { a.cancel(); } catch (x) { } });
+    if (o !== '1') e.style.opacity = o;
+  });
+  $$('.mx-box,.mx-old').forEach(n => {
+    if (n.dataset.gone) return; n.dataset.gone = '1';
+    const o = getComputedStyle(n).opacity; n.getAnimations().forEach(a => { try { a.pause(); } catch (x) { } });
+    const a = n.animate([{ opacity: o }, { opacity: 0 }], { duration: MX.out, easing: 'ease-out', fill: 'forwards' });
+    const rm = () => n.remove(); a.finished.then(rm, rm); setTimeout(rm, MX.out + 300);
+  });
+  $$('.pcard').forEach(c => { if (c.style.visibility === 'hidden') c.style.visibility = ''; });
+}
+withTransition = function (update, isNav) {
+  const mx = MORPH; MORPH = null;
+  if (!isNav || !VT_BOOT || reduceMotion) { if (isNav) settle(); const m = $('#main'), f = $('.foot'); update(); pvFlush(); if (isNav) { if (m) m.style.opacity = ''; if (f) f.style.opacity = ''; } return; }
+  settle();
+  try {
+    if (mx && mx.kind === 'open' && mx.card && mx.card.isConnected) { mxOpen(update, mx.card); return; }
+    if (mx && mx.kind === 'close') { mxClose(update, mx.id); return; }
+  } catch (e) { console.warn('[transition]', e); }
+  pageFade(update);
+};
+
+/* ---------- Décodeur : la carte se transforme en fiche, la fiche se referme en carte ----------
+   Un calque (« conteneur ») épouse la carte, puis s'étire jusqu'à la fiche (position, taille, arrondi, fond et ombre
+   évoluent ensemble) ; le contenu de la carte s'efface pendant que celui de la fiche apparaît. Le fond reste vivant dessous. */
+/* Une copie d'élément perd la position des zones défilées (rangées du Décodeur) : on la reporte. */
+function mxScrolls(src, dst) {
+  const a = src.querySelectorAll('*'), b = dst.querySelectorAll('*'), out = [];
+  for (let i = 0; i < a.length && i < b.length; i++) if (a[i].scrollLeft || a[i].scrollTop) out.push([b[i], a[i].scrollLeft, a[i].scrollTop]);
+  return () => out.forEach(([n, x, y]) => { n.style.scrollBehavior = 'auto'; n.style.scrollSnapType = 'none'; n.scrollLeft = x; n.scrollTop = y; });
+}
+function mxBox(r) {
+  const g = document.createElement('div'); g.className = 'mx-box'; g.setAttribute('aria-hidden', 'true');
+  Object.assign(g.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+  document.body.appendChild(g); return g;
+}
+function mxClone(g, el, w, h, offY) {
+  const c = el.cloneNode(true);
+  c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+  c.setAttribute('inert', ''); c.classList.add('mx-in');
+  Object.assign(c.style, { position: 'absolute', left: '0', top: (-offY || 0) + 'px', width: w + 'px', margin: '0', transform: 'none', visibility: 'visible', background: 'transparent', borderColor: 'transparent', boxShadow: 'none' });
+  if (h) c.style.height = h + 'px';
+  const sc = mxScrolls(el, c); g.appendChild(c); sc(); return c;
+}
+function mxLook(el) { const cs = getComputedStyle(el); return { r: cs.borderTopLeftRadius, bg: cs.backgroundColor, sh: cs.boxShadow === 'none' ? '0 0 0 0 rgba(0,0,0,0)' : cs.boxShadow, bc: cs.borderTopColor }; }
+function mxSheetRect(sheet) {
+  const r = sheet.getBoundingClientRect(), top = $('#top'), tb = top ? top.getBoundingClientRect().bottom : 0;
+  const t = Math.max(r.top, tb + 4);
+  return { left: r.left, top: t, width: r.width, height: Math.max(80, Math.min(r.bottom - t, innerHeight - t + 60)), offY: t - r.top };
+}
+function mxFrames(a, la, b, lb) {
+  return [{ left: a.left + 'px', top: a.top + 'px', width: a.width + 'px', height: a.height + 'px', borderRadius: la.r, backgroundColor: la.bg, boxShadow: la.sh, borderColor: la.bc },
+          { left: b.left + 'px', top: b.top + 'px', width: b.width + 'px', height: b.height + 'px', borderRadius: lb.r, backgroundColor: lb.bg, boxShadow: lb.sh, borderColor: lb.bc }];
+}
+/* La page quittée est recopiée dans un calque fixe : la nouvelle page est construite dessous tout de suite, et
+   l'ancienne s'efface pendant que le conteneur se transforme (tout se joue en même temps, sans temps mort). */
+function mxOld() {
+  const o = document.createElement('div'), fix = [];
+  o.className = 'mx-old'; o.setAttribute('aria-hidden', 'true');
+  [$('#main'), $('.foot')].forEach(el => {
+    if (!el) return; const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+    const c = el.cloneNode(true);
+    c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+    c.setAttribute('inert', '');
+    Object.assign(c.style, { position: 'absolute', left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', margin: '0', animation: 'none' });
+    o.appendChild(c); fix.push(mxScrolls(el, c));
+  });
+  document.body.appendChild(o); fix.forEach(f => f()); return o;
+}
+function mxFadeOld(o, dur) {
+  if (!o) return;
+  const a = o.animate([{ opacity: 1 }, { opacity: 0 }], { duration: dur, easing: 'cubic-bezier(.3,0,.6,1)', fill: 'forwards' });
+  const rm = () => o.remove(); a.finished.then(rm, rm); setTimeout(rm, dur + 400);
+}
+function mxOpen(update, card) {
+  const seq = MX_SEQ, cr = card.getBoundingClientRect(), cl = mxLook(card);
+  const g = mxBox(cr); Object.assign(g.style, { borderRadius: cl.r, backgroundColor: cl.bg, boxShadow: cl.sh, borderColor: cl.bc });
+  const cc = mxClone(g, card, cr.width, cr.height, 0);
+  card.style.visibility = 'hidden';
+  const old = mxOld();
+  runUpdate(update);
+  const show = holdPage([]), m = $('#main'), f = $('.foot'), sheet = $('.fsheet', m);
+  if (!sheet) { g.remove(); afterPaint(() => { if (seq !== MX_SEQ) return; show(); pvFlush(); mxFadeOld(old, 240); fadeInPage(80); }); return; }
+  const sr = mxSheetRect(sheet), sl = mxLook(sheet);
+  const sc = mxClone(g, sheet, sr.width, 0, sr.offY); sc.style.opacity = '0';
+  afterPaint(() => {
+    if (seq !== MX_SEQ) return;
+    pvFlush();
+    mxFadeOld(old, 260);
+    const a = g.animate(mxFrames(cr, cl, sr, sl), { duration: MX.open, easing: MX.ease, fill: 'forwards' });
+    cc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MX.open * 0.3, easing: 'cubic-bezier(.4,0,1,1)', fill: 'forwards' });
+    sc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: MX.open * 0.6, delay: MX.open * 0.3, easing: 'cubic-bezier(0,0,.2,1)', fill: 'both' });
+    let ended = false;
+    const end = () => {
+      if (ended) return; ended = true;
+      if (seq !== MX_SEQ) return;
+      show();
+      /* ce qui entoure la fiche (lien de retour, pied de page) apparaît pendant que le conteneur disparaît */
+      const back = $('.back', m); if (back) back.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 360, easing: 'ease-out' });
+      if (f) f.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: 'ease-out' });
+      g.remove();
+    };
+    a.finished.then(end, end); setTimeout(end, MX.open + 500);
+  });
+}
+function mxClose(update, id) {
+  const seq = MX_SEQ, m0 = $('#main'), sheet = $('.fsheet', m0);
+  if (!sheet) { pageFade(update); return; }
+  const sr = mxSheetRect(sheet), sl = mxLook(sheet);
+  const g = mxBox(sr); Object.assign(g.style, { borderRadius: sl.r, backgroundColor: sl.bg, boxShadow: sl.sh, borderColor: sl.bc });
+  const sc = mxClone(g, sheet, sr.width, 0, sr.offY);
+  sheet.style.visibility = 'hidden';
+  const old = mxOld();
+  runUpdate(update);
+  const show = holdPage([]);
+  afterPaint(() => {
+    if (seq !== MX_SEQ) return;
+    pvFlush();
+    const m = $('#main'), card = $(`.pcard[data-open="${CSS.escape(id)}"]`, m);
+    const cr = card && card.getBoundingClientRect();
+    const seen = cr && cr.width > 40 && cr.bottom > 70 && cr.top < innerHeight - 30 && cr.right > 20 && cr.left < innerWidth - 20;
+    show(); mxFadeOld(old, 240);
+    if (!seen) {
+      g.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.98)' }], { duration: 380, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' }).finished.then(() => g.remove(), () => g.remove());
+      fadeInPage(120); return;
+    }
+    const cl = mxLook(card);
+    card.style.visibility = 'hidden';
+    const cc = mxClone(g, card, cr.width, cr.height, 0); cc.style.opacity = '0';
+    const a = g.animate(mxFrames(sr, sl, cr, cl), { duration: MX.close, easing: MX.ease, fill: 'forwards' });
+    sc.animate([{ opacity: 1 }, { opacity: 0 }], { duration: MX.close * 0.3, easing: 'cubic-bezier(.4,0,1,1)', fill: 'forwards' });
+    cc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: MX.close * 0.6, delay: MX.close * 0.3, easing: 'cubic-bezier(0,0,.2,1)', fill: 'both' });
+    fadeInPage(MX.close * 0.2);
+    let ended = false;
+    const end = () => { if (ended) return; ended = true; card.style.visibility = ''; if (seq === MX_SEQ) g.remove(); };
+    a.finished.then(end, end); setTimeout(end, MX.close + 500);
+  });
+}
+
 (function start() {
   /* anciennes adresses du site (ex. kompa-invest.fr/#decodeur-tool) */
   const OLD = { 'decodeur-tool': 'decodeur', 'second-opinion-tool': 'second-opinion', 'xray-tool': 'portefeuille', magazine: 'magazine', calculateur: 'calculateur', incontournables: 'apprendre' };
@@ -6204,7 +6482,7 @@ document.addEventListener('click', e => {
   document.documentElement.classList.add('lux-now');
   render(path + (qs ? '?' + qs : ''), { focus: false });
   VT_BOOT = true;
-  requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.remove('lux-now')));
+  requestAnimationFrame(() => requestAnimationFrame(() => { document.documentElement.classList.remove('lux-now'); LUXE.live(); }));
 })();
 (function session() {
   /* retour du lien de connexion : ?connexion=ok|erreur (&ouvrir=adhesion) */
