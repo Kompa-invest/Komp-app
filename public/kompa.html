@@ -196,6 +196,9 @@ main{min-height:60vh}
 .tr.clear .tr-v .j{opacity:0;transform:translateY(-6px);position:absolute;inset:0 0 auto 0}
 .tr.clear .tr-v .c{opacity:1;transform:none;position:relative}
 .tr-v .c b{font-weight:600;background:linear-gradient(transparent 66%,rgba(139,153,255,.38) 66%)}
+/* mode cinéma : si la carte est plus haute que la place disponible (petite fenêtre, texte agrandi
+   dans le navigateur), elle est réduite juste assez pour tenir entière à l'écran (voir storyMount) */
+.cine .tr{transform:scale(var(--trz,1))}
 .tr-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.09);flex-wrap:wrap}
 .tr-foot small{color:#8e97ac;font-size:12px;line-height:1.4;max-width:34ch}
 .tr-foot .btn{height:38px;font-size:14px;background:#fff;color:var(--ink)}
@@ -5317,7 +5320,21 @@ function storyMount(root, view) {
   const story = $('#story', root), cin = $('#cinema', root), scenes = $$('.scene', root), N = scenes.length;
   const dots = $$('#smap button', root), read = $('#s-read', root), arts = $$('.art', root);
   let cine = false, cur = -1, raf = 0, io = null, timers = [], anim = 0, target = -1;
-  const fit = () => arts.forEach(a => { const w = a.clientWidth; if (w) a.style.setProperty('--z', (w / 520).toFixed(4)); });
+  /* Carte de l'accueil (Jargon / En clair). En mode cinéma, la scène fait la hauteur de l'écran : place utile = écran
+     moins l'en-tête, 20 px au-dessus et 56 px en dessous (voir .cine .scene). Si la carte est plus haute, elle est réduite
+     juste assez pour tenir entière. La réduction est calculée sur la version la plus haute (En clair) : elle ne change pas
+     d'un clic à l'autre. S'il fallait réduire de plus de 20 %, ou si le texte d'accueil ne tient pas (fenêtre très basse,
+     texte très agrandi), la page passe en mode empilé, où l'on fait défiler normalement. */
+  const card = $('#tr', root), heroCopy = $('.hero-copy', root), TR_MIN = 0.8;
+  const heroRoom = () => innerHeight - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hh')) || 74) - 20 - 56;
+  const cardH = () => {
+    const k = card.cloneNode(true); k.removeAttribute('id'); k.classList.add('clear'); k.setAttribute('aria-hidden', 'true');
+    k.style.cssText = `position:absolute;left:-9999px;top:0;width:${card.offsetWidth}px;visibility:hidden;transform:none`;
+    card.parentNode.appendChild(k); const h = Math.max(k.offsetHeight, card.offsetHeight); k.remove(); return h;
+  };
+  const heroFits = () => !card || ((!heroCopy || heroCopy.offsetHeight <= heroRoom()) && cardH() * TR_MIN <= heroRoom());
+  const fitCard = () => { if (card) card.style.setProperty('--trz', cine ? Math.min(1, (heroRoom() - 2) / cardH()).toFixed(4) : '1'); };
+  const fit = () => { arts.forEach(a => { const w = a.clientWidth; if (w) a.style.setProperty('--z', (w / 520).toFixed(4)); }); fitCard(); };
   const mzArt = $('.art-magazine', root); if (mzArt) mzLoadImgs(mzArt);
   /* Une illustration se joue en entier dès que son outil apparaît : chaque élément a son propre délai (cascade, voir v7.css).
      Quand l'outil disparaît, elle revient discrètement à son point de départ, pour se rejouer à la prochaine visite. */
@@ -5348,7 +5365,7 @@ function storyMount(root, view) {
     read.classList.toggle('hide', r.bottom < innerHeight * 0.6);
   }
   const onScroll = () => { if (!raf) raf = requestAnimationFrame(draw); };
-  const want = () => !reduceMotion && innerWidth >= 1024 && innerHeight >= 600;
+  const want = () => !reduceMotion && innerWidth >= 1024 && innerHeight >= 600 && heroFits();
   /* défilement animé vers un outil : l'outil visé s'affiche tout de suite, la page suit en douceur */
   function glide(y, dur) {
     cancelAnimationFrame(anim);
@@ -5418,7 +5435,10 @@ function storyMount(root, view) {
   root.addEventListener('click', onClick);
   addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', layout); addEventListener('keydown', onKey); addEventListener('wheel', onWheel, { passive: false });
   layout();
-  view._story = () => { removeEventListener('scroll', onScroll); removeEventListener('resize', layout); removeEventListener('keydown', onKey); removeEventListener('wheel', onWheel); cancelAnimationFrame(anim); if (io) io.disconnect(); timers.forEach(clearTimeout); if (raf) cancelAnimationFrame(raf); document.body.classList.remove('cine'); };
+  /* la taille du texte peut changer sans redimensionnement de la fenêtre (polices chargées, zoom du texte dans Safari) */
+  const ro = card && 'ResizeObserver' in window ? new ResizeObserver(() => { if (want() !== cine) layout(); else fitCard(); }) : null;
+  if (ro) { ro.observe(card); if (heroCopy) ro.observe(heroCopy); }
+  view._story = () => { if (ro) ro.disconnect(); removeEventListener('scroll', onScroll); removeEventListener('resize', layout); removeEventListener('keydown', onKey); removeEventListener('wheel', onWheel); cancelAnimationFrame(anim); if (io) io.disconnect(); timers.forEach(clearTimeout); if (raf) cancelAnimationFrame(raf); document.body.classList.remove('cine'); };
 }
 
 /* ---------- bouton Kompa Privé : au clic, le chocolat de la page Privé remplit le bouton depuis le point touché ---------- */
