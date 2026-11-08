@@ -927,6 +927,7 @@ mark.k-rendement{background:#e6e8ec}
 .mz .z-rail-lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
 .mz .z-rail-note{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.45;color:var(--muted)}
 .mz .z-big-n{font-family:var(--serif);font-size:132px;line-height:.85;color:var(--v);letter-spacing:-.04em}
+.mz .z-big-n.z-big-n2{font-size:100px}
 .mz .z-main{display:flex;flex-direction:column;gap:20px;min-width:0}
 .mz .z-ed-head .z-main{gap:14px}
 .mz .z-edition h1{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.4vw,48px);line-height:1.08;letter-spacing:-.02em}
@@ -4580,7 +4581,7 @@ route(/^magazine\/(n\d+)$/, ([slug]) => {
   return {
     title: `N°${e.n} · Le Magazine`,
     html: `<div class="mz">${mzMast('marches')}<div class="z-wrap"><article class="z-edition">
-      <header class="z-ed-head"><div class="z-rail"><span class="z-rail-lab z-muted">Édition</span><span class="z-big-n">N°${e.n}</span></div>
+      <header class="z-ed-head"><div class="z-rail"><span class="z-rail-lab z-muted">Édition</span><span class="z-big-n${String(e.n).length > 1 ? ' z-big-n2' : ''}">N°${e.n}</span></div>
         <div class="z-main"><span class="z-kick">Marchés · ${e.week}</span><h1>${e.title}</h1><p class="z-chapo">${e.chapo}</p><span class="z-meta">${e.read} de lecture · ${e.theme}${e.note ? ' · ' + e.note : ''}</span></div></header>
       <nav class="z-somm" aria-label="Sommaire de l'édition"><span class="z-rail-lab z-muted">Au sommaire</span><div>${somm}</div></nav>
       <figure class="z-hero">${mzImg(e.photo, e.photoAlt, 'z-hero-img', e.photoCap)}<figcaption>${e.photoCap}</figcaption></figure>
